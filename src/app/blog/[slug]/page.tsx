@@ -4,14 +4,15 @@ import { posts } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const post = posts.find((p) => p.slug === params.slug);
   if (!post) return { title: "Post no encontrado" };
   return {
@@ -72,7 +73,8 @@ El App Router representa un cambio paradigmático en cómo construimos aplicacio
   `,
 };
 
-export default function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage(props: Props) {
+  const params = await props.params;
   const post = posts.find((p) => p.slug === params.slug);
   if (!post) notFound();
 
@@ -89,7 +91,6 @@ export default function BlogPostPage({ params }: Props) {
         <span>/</span>
         <span className="text-[#888] truncate max-w-[200px]">{post.slug}</span>
       </div>
-
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-6">
         {post.tags.map((tag) => (
@@ -101,19 +102,16 @@ export default function BlogPostPage({ params }: Props) {
           </span>
         ))}
       </div>
-
       {/* Title */}
       <h1 className="text-3xl sm:text-4xl font-bold text-[#f0f0f0] leading-tight mb-4">
         {post.title}
       </h1>
-
       {/* Meta */}
       <div className="flex items-center gap-4 text-sm text-[#555] font-mono mb-10 pb-10 border-b border-[#1f1f1f]">
         <span>{post.date}</span>
         <span>·</span>
         <span>{post.readTime} de lectura</span>
       </div>
-
       {/* Content */}
       <div className="prose-dark space-y-6 text-[#888] leading-relaxed">
         {/* Excerpt */}
@@ -161,7 +159,6 @@ export default function BlogPostPage({ params }: Props) {
           </p>
         </div>
       </div>
-
       {/* Related posts */}
       <div className="mt-16 pt-10 border-t border-[#1f1f1f]">
         <h3 className="text-sm font-mono text-[#555] mb-6">TAMBIÉN TE PUEDE INTERESAR</h3>
