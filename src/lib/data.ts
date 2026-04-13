@@ -17,6 +17,7 @@ export type Tool = {
   github?: string;
   status: "live" | "wip" | "archived";
   featured?: boolean;
+  image?: string;
 };
 
 export const posts: Post[] = [
@@ -80,61 +81,94 @@ export const posts: Post[] = [
 
 export const tools: Tool[] = [
   {
-    id: "portfolio-blog",
-    name: "ivancidev.blog",
+    id: "gta6-landing-clone",
+    name: "GTA VI Landing Page",
     description:
-      "Este mismo blog — construido con Next.js 14, Tailwind CSS y MDX. Código abierto para que lo uses como base.",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    github: "https://github.com/ivancidev/ivancidev-blog",
-    url: "#",
+      "Landing page para el juego GTA VI con animaciones, efectos de desplazamiento y diseño responsivo.",
+    tags: ["Astro", "React", "GSAP", "Lenis"],
+    github: "https://github.com/ivancidev/gta6-landing-clone",
+    url: "https://gta6-landing-clone.vercel.app/",
     status: "live",
     featured: true,
+    image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1750027628/Captura_de_pantalla_2025-06-15_184546_y03fka.png",
   },
   {
-    id: "dev-snippets",
-    name: "Dev Snippets",
+    id: "x-clone-twitter",
+    name: "X-Twitter Clone",
     description:
-      "Colección personal de snippets y utilidades para acelerar el desarrollo diario. Organizado por lenguaje y caso de uso.",
-    tags: ["TypeScript", "React", "Node.js"],
-    github: "https://github.com/ivancidev",
-    status: "wip",
-    featured: true,
-  },
-  {
-    id: "cli-generator",
-    name: "Component CLI",
-    description:
-      "CLI para generar componentes React con TypeScript, tests y stories listos para usar. Configurable con templates.",
-    tags: ["Node.js", "CLI", "Tooling"],
-    github: "https://github.com/ivancidev",
-    status: "wip",
-  },
-  {
-    id: "api-boilerplate",
-    name: "API Boilerplate",
-    description:
-      "Template de Express + TypeScript con JWT, validación con Zod, Prisma y Docker. Listo para producción.",
-    tags: ["Node.js", "Express", "Prisma"],
-    github: "https://github.com/ivancidev",
+      "Clon de Twitter con funcionalidades de publicación, comentarios y notificaciones en tiempo real.",
+    tags: ["React", "TypeScript", "Express", "MongoDB"],
+    github: "https://github.com/ivancidev/x-clone-twitter",
+    url: "https://x-clone-twitter-murex.vercel.app/",
     status: "live",
+    featured: true,
+    image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1750027998/Captura_de_pantalla_2025-06-15_185152_nuk7bb.png",
   },
   {
-    id: "react-hooks-lib",
-    name: "useHooks Collection",
+    id: "useTeam-kanban",
+    name: "Kanban App",
     description:
-      "Librería de custom hooks para React: useLocalStorage, useDebounce, useFetch, useMediaQuery y más.",
-    tags: ["React", "Hooks", "NPM"],
-    github: "https://github.com/ivancidev",
-    status: "wip",
+      "Aplicación Kanban con Next.js y NestJS, conectados a MongoDB Atlas. Comunicación vía HTTP/WebSocket y despliegue con Docker Compose.",
+    tags: ["Next.js", "NestJS", "MongoDB", "WebSocket", "Docker"],
+    github: "https://github.com/ivancidev/useTeam-kanban-challenge",
+    url: "https://use-team-kanban-challenge.vercel.app/",
+    status: "live",
+    featured: true,
+    image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1764647198/Screenshot_2025-12-01_234311_mbd82h.png",
   },
   {
-    id: "design-system",
-    name: "DS Starter",
+    id: "workBoardAgile",
+    name: "workBoardAgile",
     description:
-      "Design system minimalista con Tailwind y Radix UI. Tokens de diseño, componentes accesibles y Storybook incluido.",
-    tags: ["Design System", "Tailwind", "Radix"],
-    github: "https://github.com/ivancidev",
+      "Plataforma colaborativa de gestión de proyectos para equipos ágiles. Organiza tareas en tableros visuales con drag-and-drop entre columnas.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Shadcn"],
+    github: "https://github.com/ivancidev/workBoardAgile",
+    url: "https://work-board-agile.vercel.app/",
+    status: "live",
+    image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1750030065/Captura_de_pantalla_2025-06-15_192656_wiohg0.png",
+  },
+  {
+    id: "webTime",
+    name: "Webtime",
+    description:
+      "Web de audiolibros enfocada a personas que buscan material sobre Programación Web. Proyecto de Ingeniería de Software.",
+    tags: ["React", "JavaScript", "Tailwind CSS", "Supabase"],
+    github: "https://github.com/ivancidev/webTime",
+    url: "https://web-time-seven.vercel.app/app",
+    status: "live",
+    image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1750028403/Captura_de_pantalla_2025-06-15_185752_blgbdf.png",
+  },
+  {
+    id: "shopping-cart-app",
+    name: "Shopping Cart App",
+    description:
+      "Aplicación de compras online donde los usuarios pueden ver productos, agregarlos al carrito y gestionar cantidades. Usa la Fake Store API.",
+    tags: ["React", "Vite", "Material UI"],
+    github: "https://github.com/ivancidev/shopping-cart-app",
+    url: "https://shopping-cart-app-gilt.vercel.app/",
+    status: "live",
+    image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1750030569/Captura_de_pantalla_2025-06-15_193440_f6vv7q.png",
+  },
+  {
+    id: "proyectoASO",
+    name: "Proyecto ASO",
+    description:
+      "Interfaz web para administrar y mostrar recursos compartidos de Samba en OpenSUSE.",
+    tags: ["React", "JavaScript", "Tailwind CSS", "Python", "Flask"],
+    github: "https://github.com/ivancidev/ProyectoASO",
+    url: "https://proyecto-aso.vercel.app/",
+    status: "live",
+    image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1750031295/Captura_de_pantalla_2025-06-15_194531_e7xrc6.png",
+  },
+  {
+    id: "el-bocado-perfecto",
+    name: "El Bocado Perfecto",
+    description:
+      "Página web para un restaurante con carta de platos, jugos y desayunos. Los clientes pueden realizar pedidos por delivery o en el local.",
+    tags: ["React", "JavaScript", "Node.js", "Express", "Redis"],
+    github: "https://github.com/ivancidev/Proyecto_scesi_Pagina_Restaurante",
     status: "wip",
+    image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1750082753/Captura_de_pantalla_2025-06-16_100417_tjmroi.png",
   },
 ];
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { posts, tools } from "@/lib/data";
 
 export default function HomePage() {
@@ -162,34 +163,49 @@ export default function HomePage() {
           {featuredTools.map((tool) => (
             <div
               key={tool.id}
-              className="group p-4 rounded-xl border border-[#1f1f1f] hover:border-[#00ff88]/30 bg-[#111]/50 hover:bg-[#111] transition-all duration-200"
+              className="group rounded-xl border border-[#1f1f1f] hover:border-[#00ff88]/30 bg-[#111]/50 hover:bg-[#111] transition-all duration-200 overflow-hidden"
             >
-              <div className="flex items-start justify-between mb-3">
-                <div className="w-8 h-8 rounded-md bg-[#161616] border border-[#1f1f1f] flex items-center justify-center">
-                  <svg className="w-4 h-4 text-[#00ff88]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
+              {tool.image && (
+                <div className="relative h-32 overflow-hidden">
+                  <Image
+                    src={tool.image}
+                    alt={tool.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent" />
                 </div>
-                <span
-                  className={`text-xs px-2 py-0.5 rounded-full font-mono ${
-                    tool.status === "live"
-                      ? "bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/20"
-                      : "bg-[#1f1f1f] text-[#555] border border-[#2a2a2a]"
-                  }`}
-                >
-                  {tool.status}
-                </span>
-              </div>
-              <h3 className="font-semibold text-[#f0f0f0] mb-1 group-hover:text-[#00ff88] transition-colors">
-                {tool.name}
-              </h3>
-              <p className="text-sm text-[#555] leading-relaxed line-clamp-2">{tool.description}</p>
-              <div className="flex flex-wrap gap-1 mt-3">
-                {tool.tags.slice(0, 2).map((tag) => (
-                  <span key={tag} className="text-[11px] text-[#444] font-mono">
-                    #{tag.toLowerCase().replace(/\s/g, "-")}
+              )}
+              <div className="p-4">
+                <div className="flex items-start justify-between mb-3">
+                  {!tool.image && (
+                    <div className="w-8 h-8 rounded-md bg-[#161616] border border-[#1f1f1f] flex items-center justify-center">
+                      <svg className="w-4 h-4 text-[#00ff88]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                      </svg>
+                    </div>
+                  )}
+                  <span
+                    className={`text-xs px-2 py-0.5 rounded-full font-mono ml-auto ${
+                      tool.status === "live"
+                        ? "bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/20"
+                        : "bg-[#1f1f1f] text-[#555] border border-[#2a2a2a]"
+                    }`}
+                  >
+                    {tool.status}
                   </span>
-                ))}
+                </div>
+                <h3 className="font-semibold text-[#f0f0f0] mb-1 group-hover:text-[#00ff88] transition-colors">
+                  {tool.name}
+                </h3>
+                <p className="text-sm text-[#555] leading-relaxed line-clamp-2">{tool.description}</p>
+                <div className="flex flex-wrap gap-1 mt-3">
+                  {tool.tags.slice(0, 2).map((tag) => (
+                    <span key={tag} className="text-[11px] text-[#444] font-mono">
+                      #{tag.toLowerCase().replace(/\s/g, "-")}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
