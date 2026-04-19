@@ -1,26 +1,24 @@
 {
   "name": "ivancidev-blog",
-  "version": "0.1.0",
+  "type": "module",
+  "version": "0.3.0",
   "private": true,
+  "packageManager": "pnpm@10.28.1",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.35"
+    "astro": "^6.1.8",
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/sitemap": "^3.7.2"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.35"
+    "@tailwindcss/typography": "^0.5.15",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
   }
 }

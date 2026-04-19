@@ -1,0 +1,131 @@
+---
+title: "Git: Flujo de trabajo profesional para equipos"
+excerpt: "Gitflow, trunk-based development, conventional commits y todo lo que necesitas para colaborar de forma efectiva."
+date: "2025-01-05"
+readTime: "10 min"
+tags: ["Git", "DevOps", "Workflow"]
+---
+
+## ¿Gitflow o Trunk-based?
+
+Esta es la primera pregunta que debes responder con tu equipo. No existe una respuesta universal — depende de cómo deploys.
+
+**Gitflow** tiene sentido cuando:
+- Tienes releases programados (cada 2 semanas, cada mes)
+- Múltiples versiones en producción simultáneamente
+- Equipos grandes con QA separado
+
+**Trunk-based development** tiene sentido cuando:
+- Deploys continuos (varias veces al día)
+- Feature flags para ocultar trabajo en progreso
+- Equipos que valoran la integración frecuente
+
+La tendencia moderna en equipos ágiles es trunk-based. La integración frecuente al main branch detecta conflictos antes de que se conviertan en problemas.
+
+## Conventional Commits
+
+Estandarizar los mensajes de commit transforma el historial de git en documentación útil:
+
+```
+tipo(scope): descripción corta
+
+[cuerpo opcional]
+[footer opcional]
+```
+
+Tipos principales:
+- `feat`: nueva funcionalidad
+- `fix`: corrección de bug
+- `docs`: solo documentación
+- `refactor`: refactoring sin cambio de comportamiento
+- `chore`: tareas de mantenimiento (deps, config)
+- `test`: tests
+- `perf`: mejoras de performance
+
+```bash
+# Buenos mensajes:
+git commit -m "feat(auth): add JWT refresh token rotation"
+git commit -m "fix(api): handle null user in session middleware"
+git commit -m "chore: update dependencies to latest"
+
+# Malos mensajes:
+git commit -m "fix stuff"
+git commit -m "wip"
+git commit -m "asdfgh"
+```
+
+Con conventional commits puedes auto-generar changelogs y determinar automáticamente si un release es major, minor o patch.
+
+## Estrategia de ramas
+
+Para trunk-based con CI/CD:
+
+```
+main          → Producción. Siempre deployable.
+feat/xxx      → Features cortas (máx 2-3 días de vida)
+fix/xxx       → Bugfixes
+chore/xxx     → Mantenimiento
+```
+
+Las feature branches deben ser **cortas**. Si llevas más de 3 días en una rama sin mergear, probablemente estás trabajando en algo muy grande que debería dividirse.
+
+## Pull Requests efectivos
+
+Un buen PR:
+1. **Una sola cosa** — no mezcles feature + refactor + bugfix
+2. **Descripción del por qué**, no solo del qué
+3. **Screenshots** para cambios de UI
+4. **Tests** que cubran el nuevo comportamiento
+
+Template sugerido:
+```markdown
+## ¿Qué cambia?
+- Breve descripción de los cambios
+
+## ¿Por qué?
+- Motivación o issue que resuelve
+
+## Cómo probar
+1. Paso 1
+2. Paso 2
+
+## Screenshots (si aplica)
+```
+
+## Comandos que todo dev debe dominar
+
+```bash
+# Ver el historial en forma de árbol
+git log --oneline --graph --all
+
+# Deshacer el último commit (mantiene los cambios)
+git reset --soft HEAD~1
+
+# Traer cambios específicos de otra rama
+git cherry-pick <commit-hash>
+
+# Rebase interactivo (limpiar commits antes del PR)
+git rebase -i HEAD~3
+
+# Guardar cambios temporalmente
+git stash push -m "wip: feature login"
+git stash pop
+
+# Buscar qué commit introdujo un bug
+git bisect start
+git bisect bad           # commit actual tiene el bug
+git bisect good v1.0.0   # este tag estaba bien
+# git bisect te va guiando automáticamente
+```
+
+## Protección del main branch
+
+Configura estas reglas en GitHub/GitLab:
+- **Require PR reviews** antes de merge (mínimo 1 reviewer)
+- **Require status checks** — CI debe pasar
+- **No force push** al main
+- **Delete branches** automáticamente tras merge
+
+## Conclusión
+
+Un buen flujo de Git no es sobre qué estrategia usas — es sobre consistencia, integración frecuente y comunicación clara a través de los commits. Empieza con conventional commits y PRs pequeños; el resto viene solo.
