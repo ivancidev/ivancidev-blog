@@ -24,4 +24,10 @@ Optimize for search engine visibility and ranking. Use when asked to "improve SE
 
 - `.claude/skills/seo/SKILL.md`
 
+## Design tokens (colors)
+
+Dark theme and orange accent palette for consistent UI, Tailwind arbitrary hex classes, prose/blog overrides, and exceptions (e.g. tool brand colors in `src/lib/data.ts`). Use when styling components, matching the site look, or asking for "colors", "palette", or "theme".
+
+- `.claude/skills/colors/SKILL.md`
+
 <!-- autoskills:end -->

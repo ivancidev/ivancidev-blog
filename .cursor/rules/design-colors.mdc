@@ -1,0 +1,18 @@
+---
+description: ivancidev-blog color palette — use for all UI/styling in this repo
+alwaysApply: true
+---
+
+# Design colors (ivancidev-blog)
+
+Read the full reference: `.claude/skills/colors/SKILL.md`.
+
+**Accent:** `#f97316` (primary), CTA hover `#ea580c`, soft `#f97316` with `/5`, `/20`, `/30` opacity as in the skill.
+
+**Surfaces:** body `#0a0a0a`, cards `#111`, chips/code bg `#161616`, pre `#0d0d0d`.
+
+**Text:** `#f0f0f0` → `#888` → `#555` / `#444` / `#333`.
+
+**Borders:** `#1f1f1f`, hover `#333` or `border-[#f97316]/30`.
+
+**Rules:** Prefer Tailwind arbitrary hex classes matching the tables above; avoid unrelated Tailwind palette utilities for site chrome. Tool brand colors in `src/lib/data.ts` are exceptions per tool.

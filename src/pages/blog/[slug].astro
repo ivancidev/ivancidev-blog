@@ -63,15 +63,15 @@ const relatedPosts = allPosts
       prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
       prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
       prose-p:text-[#888] prose-p:leading-relaxed
-      prose-a:text-[#00ff88] prose-a:no-underline hover:prose-a:underline
+      prose-a:text-[#f97316] prose-a:no-underline hover:prose-a:underline
       prose-strong:text-[#f0f0f0]
       prose-code:font-mono
       prose-pre:rounded-xl prose-pre:border prose-pre:border-[#1f1f1f]
-      prose-blockquote:border-l-[#00ff88] prose-blockquote:text-[#aaa]
+      prose-blockquote:border-l-[#f97316] prose-blockquote:text-[#aaa]
       prose-li:text-[#888]
     ">
       <!-- Excerpt lead -->
-      <p class="text-lg text-[#aaa] leading-relaxed border-l-2 border-[#00ff88] pl-4 not-prose mb-8">
+      <p class="text-lg text-[#aaa] leading-relaxed border-l-2 border-[#f97316] pl-4 not-prose mb-8">
         {post.data.excerpt}
       </p>
       <Content />
@@ -84,16 +84,16 @@ const relatedPosts = allPosts
         {relatedPosts.map((related) => (
           <a
             href={`/blog/${related.id}`}
-            class="group flex items-center justify-between p-3 rounded-lg border border-[#1f1f1f] hover:border-[#00ff88]/30 transition-all"
+            class="group flex items-center justify-between p-3 rounded-lg border border-[#1f1f1f] hover:border-[#f97316]/30 transition-all"
           >
             <div>
-              <p class="text-sm font-medium text-[#f0f0f0] group-hover:text-[#00ff88] transition-colors">
+              <p class="text-sm font-medium text-[#f0f0f0] group-hover:text-[#f97316] transition-colors">
                 {related.data.title}
               </p>
               <p class="text-xs text-[#444] font-mono mt-0.5">{related.data.readTime} lectura</p>
             </div>
             <svg
-              class="w-4 h-4 text-[#333] group-hover:text-[#00ff88] transition-all shrink-0 group-hover:translate-x-1"
+              class="w-4 h-4 text-[#333] group-hover:text-[#f97316] transition-all shrink-0 group-hover:translate-x-1"
               fill="none" stroke="currentColor" viewBox="0 0 24 24"
             >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
