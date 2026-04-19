@@ -1,0 +1,107 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+type Props = {
+  post: Awaited<ReturnType<typeof getCollection<'blog'>>>[0];
+};
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+---
+
+<Layout title={post.data.title} description={post.data.excerpt}>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-xs font-mono text-[#555] mb-8">
+      <a href="/" class="hover:text-[#888] transition-colors">home</a>
+      <span>/</span>
+      <a href="/blog" class="hover:text-[#888] transition-colors">blog</a>
+      <span>/</span>
+      <span class="text-[#888] truncate max-w-[200px]">{post.id}</span>
+    </div>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      {post.data.tags.map((tag) => (
+        <span class="text-xs px-2.5 py-1 rounded-md font-mono bg-[#111] text-[#555] border border-[#1f1f1f]">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl sm:text-4xl font-bold text-[#f0f0f0] leading-tight mb-4">
+      {post.data.title}
+    </h1>
+
+    <!-- Meta -->
+    <div class="flex items-center gap-4 text-sm text-[#555] font-mono mb-10 pb-10 border-b border-[#1f1f1f]">
+      <span>{post.data.date}</span>
+      <span>·</span>
+      <span>{post.data.readTime} de lectura</span>
+    </div>
+
+    <!-- Content -->
+    <div class="prose prose-dark max-w-none
+      prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+      prose-p:text-[#888] prose-p:leading-relaxed
+      prose-a:text-[#00ff88] prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-[#f0f0f0]
+      prose-code:font-mono
+      prose-pre:rounded-xl prose-pre:border prose-pre:border-[#1f1f1f]
+      prose-blockquote:border-l-[#00ff88] prose-blockquote:text-[#aaa]
+      prose-li:text-[#888]
+    ">
+      <!-- Excerpt lead -->
+      <p class="text-lg text-[#aaa] leading-relaxed border-l-2 border-[#00ff88] pl-4 not-prose mb-8">
+        {post.data.excerpt}
+      </p>
+      <Content />
+    </div>
+
+    <!-- Related posts -->
+    <div class="mt-16 pt-10 border-t border-[#1f1f1f]">
+      <h3 class="text-sm font-mono text-[#555] mb-6">TAMBIÉN TE PUEDE INTERESAR</h3>
+      <div class="space-y-3">
+        {relatedPosts.map((related) => (
+          <a
+            href={`/blog/${related.id}`}
+            class="group flex items-center justify-between p-3 rounded-lg border border-[#1f1f1f] hover:border-[#00ff88]/30 transition-all"
+          >
+            <div>
+              <p class="text-sm font-medium text-[#f0f0f0] group-hover:text-[#00ff88] transition-colors">
+                {related.data.title}
+              </p>
+              <p class="text-xs text-[#444] font-mono mt-0.5">{related.data.readTime} lectura</p>
+            </div>
+            <svg
+              class="w-4 h-4 text-[#333] group-hover:text-[#00ff88] transition-all shrink-0 group-hover:translate-x-1"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</Layout>
