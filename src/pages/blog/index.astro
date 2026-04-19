@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<Layout title="Blog" description="Artículos sobre React, Astro, TypeScript, Node.js y más.">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-2 text-xs font-mono text-[#555] mb-4">
+        <a href="/" class="hover:text-[#888] transition-colors">home</a>
+        <span>/</span>
+        <span class="text-[#888]">blog</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#f0f0f0] mb-3">Blog</h1>
+      <p class="text-[#555] max-w-lg">
+        Artículos sobre desarrollo web, patrones de diseño y lo que voy aprendiendo en el camino.
+      </p>
+    </div>
+
+    <!-- Posts list -->
+    <div class="space-y-3">
+      {posts.map((post) => (
+        <a
+          href={`/blog/${post.id}`}
+          class="group flex items-start justify-between p-5 rounded-xl border border-[#1f1f1f] hover:border-[#00ff88]/30 bg-[#111]/50 hover:bg-[#111] transition-all duration-200"
+        >
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap gap-1.5 mb-2">
+              {post.data.tags.map((tag) => (
+                <span class="text-[11px] px-2 py-0.5 rounded font-mono text-[#444] bg-[#161616] border border-[#1f1f1f]">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <h2 class="font-semibold text-[#f0f0f0] group-hover:text-[#00ff88] transition-colors mb-1">{post.data.title}</h2>
+            <p class="text-sm text-[#555] leading-relaxed line-clamp-2 mb-3">{post.data.excerpt}</p>
+            <div class="flex items-center gap-3 text-xs font-mono text-[#444]">
+              <span>{post.data.date}</span>
+              <span class="text-[#333]">·</span>
+              <span>{post.data.readTime} de lectura</span>
+            </div>
+          </div>
+          <svg
+            class="w-4 h-4 text-[#333] group-hover:text-[#00ff88] transition-all shrink-0 mt-1 ml-6 group-hover:translate-x-1"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</Layout>

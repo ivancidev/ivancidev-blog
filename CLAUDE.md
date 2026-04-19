@@ -12,113 +12,16 @@ Audit and improve web accessibility following WCAG 2.2 guidelines. Use when aske
 - `.claude/skills/accessibility/references/A11Y-PATTERNS.md`: Practical, copy-paste-ready patterns for common accessibility requirements. Each pattern is self-contained and linked from the main [SKILL.md](../SKILL.md).
 - `.claude/skills/accessibility/references/WCAG.md`
 
-## API Design Principles
+## Astro Usage Guide
 
-Master REST and GraphQL API design principles to build intuitive, scalable, and maintainable APIs that delight developers. Use when designing new APIs, reviewing API specifications, or establishing API design standards.
+Skill for building with the Astro web framework. Helps create Astro components and pages, configure SSR adapters, set up content collections, deploy static sites, and manage project structure and CLI commands. Use when the user needs to work with Astro, mentions .astro files, asks about static si...
 
-- `.claude/skills/api-design-principles/SKILL.md`
-- `.claude/skills/api-design-principles/assets/api-design-checklist.md`
-- `.claude/skills/api-design-principles/references/graphql-schema-design.md`
-- `.claude/skills/api-design-principles/references/rest-best-practices.md`
-
-## Error Handling Patterns
-
-Master error handling patterns across languages including exceptions, Result types, error propagation, and graceful degradation to build resilient applications. Use when implementing error handling, designing APIs, or improving application reliability.
-
-- `.claude/skills/error-handling-patterns/SKILL.md`
-
-## Design Thinking
-
-Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beaut...
-
-- `.claude/skills/frontend-design/SKILL.md`
-
-## Next.js Best Practices
-
-Next.js best practices - file conventions, RSC boundaries, data patterns, async APIs, metadata, error handling, route handlers, image/font optimization, bundling
-
-- `.claude/skills/next-best-practices/SKILL.md`
-- `.claude/skills/next-best-practices/async-patterns.md`: In Next.js 15+, `params`, `searchParams`, `cookies()`, and `headers()` are asynchronous.
-- `.claude/skills/next-best-practices/bundling.md`: Fix common bundling issues with third-party packages.
-- `.claude/skills/next-best-practices/data-patterns.md`: Choose the right data fetching pattern for each use case.
-- `.claude/skills/next-best-practices/debug-tricks.md`: Tricks to speed up debugging Next.js applications.
-- `.claude/skills/next-best-practices/directives.md`: These are React directives, not Next.js specific.
-- `.claude/skills/next-best-practices/error-handling.md`: Handle errors gracefully in Next.js applications.
-- `.claude/skills/next-best-practices/file-conventions.md`: Next.js App Router uses file-based routing with special file conventions.
-- `.claude/skills/next-best-practices/font.md`: Use `next/font` for automatic font optimization with zero layout shift.
-- `.claude/skills/next-best-practices/functions.md`: Next.js function APIs.
-- `.claude/skills/next-best-practices/hydration-error.md`: Diagnose and fix React hydration mismatch errors.
-- `.claude/skills/next-best-practices/image.md`: Use `next/image` for automatic image optimization.
-- `.claude/skills/next-best-practices/metadata.md`: Add SEO metadata to Next.js pages using the Metadata API.
-- `.claude/skills/next-best-practices/parallel-routes.md`: Parallel routes render multiple pages in the same layout. Intercepting routes show a different UI when navigating from within your app vs direct URL access. Together they enable modal patterns.
-- `.claude/skills/next-best-practices/route-handlers.md`: Create API endpoints with `route.ts` files.
-- `.claude/skills/next-best-practices/rsc-boundaries.md`: Detect and prevent invalid patterns when crossing Server/Client component boundaries.
-- `.claude/skills/next-best-practices/runtime-selection.md`: Use the default Node.js runtime for new routes and pages. Only use Edge runtime if the project already uses it or there's a specific requirement.
-- `.claude/skills/next-best-practices/scripts.md`: Loading third-party scripts in Next.js.
-- `.claude/skills/next-best-practices/self-hosting.md`: Deploy Next.js outside of Vercel with confidence.
-- `.claude/skills/next-best-practices/suspense-boundaries.md`: Client hooks that cause CSR bailout without Suspense boundaries.
-
-## Cache Components (Next.js 16+)
-
-Next.js 16 Cache Components - PPR, use cache directive, cacheLife, cacheTag, updateTag
-
-- `.claude/skills/next-cache-components/SKILL.md`
-
-## Upgrade Next.js
-
-Upgrade Next.js to the latest version following official migration guides and codemods
-
-- `.claude/skills/next-upgrade/SKILL.md`
-
-## Node.js Backend Patterns
-
-Build production-ready Node.js backend services with Express/Fastify, implementing middleware patterns, error handling, authentication, database integration, and API design best practices. Use when creating Node.js servers, REST APIs, GraphQL backends, or microservices architectures.
-
-- `.claude/skills/nodejs-backend-patterns/SKILL.md`
-- `.claude/skills/nodejs-backend-patterns/references/advanced-patterns.md`: Advanced patterns for dependency injection, database integration, authentication, caching, and API response formatting.
+- `.claude/skills/astro/SKILL.md`
 
 ## SEO optimization
 
 Optimize for search engine visibility and ranking. Use when asked to "improve SEO", "optimize for search", "fix meta tags", "add structured data", "sitemap optimization", or "search engine optimization".
 
 - `.claude/skills/seo/SKILL.md`
-
-## Tailwind CSS Development Patterns
-
-Provides comprehensive Tailwind CSS utility-first styling patterns including responsive design, layout utilities, flexbox, grid, spacing, typography, colors, and modern CSS best practices. Use when styling React/Vue/Svelte components, building responsive layouts, implementing design systems, or o...
-
-- `.claude/skills/tailwind-css-patterns/SKILL.md`
-- `.claude/skills/tailwind-css-patterns/references/accessibility.md`
-- `.claude/skills/tailwind-css-patterns/references/animations.md`: Usage:
-- `.claude/skills/tailwind-css-patterns/references/component-patterns.md`
-- `.claude/skills/tailwind-css-patterns/references/configuration.md`: Use the `@theme` directive for CSS-based configuration:
-- `.claude/skills/tailwind-css-patterns/references/layout-patterns.md`: Basic flex container:
-- `.claude/skills/tailwind-css-patterns/references/performance.md`: Configure content sources for optimal purging:
-- `.claude/skills/tailwind-css-patterns/references/reference.md`: Tailwind CSS is a utility-first CSS framework that generates styles by scanning HTML, JavaScript, and template files for class names. It provides a comprehensive design system through CSS utility classes, enabling rapid UI development without writing custom CSS. The framework operates at build-ti...
-- `.claude/skills/tailwind-css-patterns/references/responsive-design.md`: Enable dark mode in tailwind.config.js:
-
-## TypeScript Advanced Types
-
-Master TypeScript's advanced type system including generics, conditional types, mapped types, template literals, and utility types for building type-safe applications. Use when implementing complex type logic, creating reusable type utilities, or ensuring compile-time type safety in TypeScript pr...
-
-- `.claude/skills/typescript-advanced-types/SKILL.md`
-
-## React Composition Patterns
-
-Composition patterns for building flexible, maintainable React components. Avoid boolean prop proliferation by using compound components, lifting state, and composing internals. These patterns make codebases easier for both humans and AI agents to work with as they scale.
-
-- `.claude/skills/vercel-composition-patterns/SKILL.md`
-- `.claude/skills/vercel-composition-patterns/AGENTS.md`: **Version 1.0.0** Engineering January 2026
-- `.claude/skills/vercel-composition-patterns/README.md`: A structured repository for React composition patterns that scale. These patterns help avoid boolean prop proliferation by using compound components, lifting state, and composing internals.
-- `.claude/skills/vercel-composition-patterns/rules/_sections.md`: This file defines all sections, their ordering, impact levels, and descriptions. The section ID (in parentheses) is the filename prefix used to group rules.
-- `.claude/skills/vercel-composition-patterns/rules/_template.md`: Brief explanation of the rule and why it matters.
-- `.claude/skills/vercel-composition-patterns/rules/architecture-avoid-boolean-props.md`: Don't add boolean props like `isThread`, `isEditing`, `isDMThread` to customize component behavior. Each boolean doubles possible states and creates unmaintainable conditional logic. Use composition instead.
-- `.claude/skills/vercel-composition-patterns/rules/architecture-compound-components.md`: Structure complex components as compound components with a shared context. Each subcomponent accesses shared state via context, not props. Consumers compose the pieces they need.
-- `.claude/skills/vercel-composition-patterns/rules/patterns-children-over-render-props.md`: Use `children` for composition instead of `renderX` props. Children are more readable, compose naturally, and don't require understanding callback signatures.
-- `.claude/skills/vercel-composition-patterns/rules/patterns-explicit-variants.md`: Instead of one component with many boolean props, create explicit variant components. Each variant composes the pieces it needs. The code documents itself.
-- `.claude/skills/vercel-composition-patterns/rules/react19-no-forwardref.md`: In React 19, `ref` is now a regular prop (no `forwardRef` wrapper needed), and `use()` replaces `useContext()`.
-- `.claude/skills/vercel-composition-patterns/rules/state-context-interface.md`: Define a **generic interface** for your component context with three parts: can implement—enabling the same UI components to work with completely different state implementations.
-- `.claude/skills/vercel-composition-patterns/rules/state-decouple-implementation.md`: The provider component should be the only place that knows how state is managed. UI components consume the context interface—they don't know if state comes from useState, Zustand, or a server sync.
-- `.claude/skills/vercel-composition-patterns/rules/state-lift-state.md`: Move state management into dedicated provider components. This allows sibling components outside the main UI to access and modify state without prop drilling or awkward refs.
 
 <!-- autoskills:end -->

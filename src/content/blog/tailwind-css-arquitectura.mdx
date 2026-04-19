@@ -1,0 +1,128 @@
+---
+title: "Arquitectura de diseño con Tailwind CSS"
+excerpt: "Cómo organizar tus estilos con Tailwind sin volverte loco: design tokens, componentes reutilizables y patrones escalables."
+date: "2025-02-10"
+readTime: "6 min"
+tags: ["Tailwind CSS", "CSS", "Design"]
+---
+
+## El problema de escala
+
+Tailwind es increíblemente productivo al principio. Pero en proyectos grandes, sin una estrategia clara, terminas con clases repetidas en 30 lugares y un botón que tiene 15 variantes definidas de forma inconsistente.
+
+La solución no es abandonar Tailwind — es darle estructura.
+
+## Design Tokens como fuente de verdad
+
+Antes de escribir una sola clase, define tus tokens en `tailwind.config.js`:
+
+```js
+// tailwind.config.js
+export default {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          DEFAULT: '#00ff88',
+          hover: '#00cc6e',
+          muted: 'rgb(0 255 136 / 0.1)',
+        },
+        surface: {
+          base: '#0a0a0a',
+          raised: '#111111',
+          overlay: '#161616',
+        },
+        border: {
+          subtle: '#1f1f1f',
+          default: '#2a2a2a',
+          strong: '#333333',
+        },
+      },
+      fontFamily: {
+        mono: ['GeistMono', 'Fira Code', 'monospace'],
+      },
+    },
+  },
+};
+```
+
+Ahora en lugar de `bg-[#00ff88]` en 50 lugares, usas `bg-brand`. Si el color cambia, cambias un solo sitio.
+
+## Componentes con @apply
+
+Para elementos muy repetidos, `@apply` en tu CSS es una solución válida:
+
+```css
+/* components.css */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5
+           bg-brand text-black font-semibold text-sm rounded-lg
+           hover:bg-brand-hover transition-colors;
+  }
+
+  .card {
+    @apply rounded-xl border border-border-subtle
+           bg-surface-raised/50 hover:bg-surface-raised
+           transition-all duration-200;
+  }
+}
+```
+
+Úsalo con moderación — el objetivo es extraer patrones **realmente** repetidos, no cada botón que ves.
+
+## Convención de variantes
+
+Define variantes consistentes para elementos interactivos:
+
+```
+Estado base:     text-[#888]  border-[#1f1f1f]  bg-[#111]/50
+Estado hover:    text-[#f0f0f0]  border-[#333]  bg-[#111]
+Estado activo:   text-[#00ff88]  border-[#00ff88]/20
+Estado disabled: text-[#333]  cursor-not-allowed opacity-50
+```
+
+Documentar esto en un archivo `DESIGN.md` o en tu Storybook evita inconsistencias entre componentes.
+
+## Organización de archivos
+
+```
+src/
+  styles/
+    global.css      → @tailwind directives, @font-face, reset
+    components.css  → @apply para patrones muy repetidos
+  components/
+    ui/
+      Button.tsx    → Variantes con class-variance-authority
+      Card.tsx
+      Badge.tsx
+```
+
+### class-variance-authority (CVA)
+
+Para componentes con variantes en React/Vue, CVA es superior a concatenar strings:
+
+```tsx
+import { cva } from 'class-variance-authority';
+
+const button = cva(
+  'inline-flex items-center gap-2 font-semibold rounded-lg transition-colors',
+  {
+    variants: {
+      variant: {
+        primary: 'bg-[#00ff88] text-black hover:bg-[#00cc6e]',
+        ghost: 'text-[#888] border border-[#1f1f1f] hover:text-[#f0f0f0] hover:border-[#333]',
+      },
+      size: {
+        sm: 'text-xs px-3 py-1.5',
+        md: 'text-sm px-5 py-2.5',
+      },
+    },
+    defaultVariants: { variant: 'primary', size: 'md' },
+  }
+);
+```
+
+## Conclusión
+
+Tailwind escala bien cuando tienes tokens bien definidos, convenciones claras de estado, y extraes abstracciones solo cuando realmente hay repetición. La clave es que las decisiones de diseño vivan en el config, no dispersas en el markup.

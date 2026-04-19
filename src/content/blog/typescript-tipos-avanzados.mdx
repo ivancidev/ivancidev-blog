@@ -1,0 +1,147 @@
+---
+title: "TypeScript: Tipos avanzados que debes conocer"
+excerpt: "Explorando utility types, mapped types, conditional types y template literal types para escribir código más seguro y expresivo."
+date: "2025-02-28"
+readTime: "12 min"
+tags: ["TypeScript", "JavaScript"]
+featured: true
+---
+
+## Por qué aprender tipos avanzados
+
+Los utility types básicos como `Partial<T>` o `Pick<T, K>` son solo el comienzo. TypeScript tiene un sistema de tipos Turing-completo que te permite expresar restricciones que de otra forma solo podrías detectar en runtime.
+
+## Utility Types esenciales
+
+### `Required` y `Partial`
+
+```typescript
+type User = {
+  id: string;
+  name?: string;
+  email?: string;
+};
+
+type RequiredUser = Required<User>;
+// { id: string; name: string; email: string; }
+
+type PartialUser = Partial<User>;
+// { id?: string; name?: string; email?: string; }
+```
+
+### `Pick` y `Omit`
+
+```typescript
+type UserPreview = Pick<User, 'id' | 'name'>;
+// { id: string; name?: string; }
+
+type UserWithoutId = Omit<User, 'id'>;
+// { name?: string; email?: string; }
+```
+
+### `Record`
+
+Ideal para diccionarios tipados:
+
+```typescript
+type Status = 'active' | 'inactive' | 'pending';
+type StatusConfig = Record<Status, { label: string; color: string }>;
+
+const config: StatusConfig = {
+  active: { label: 'Activo', color: 'green' },
+  inactive: { label: 'Inactivo', color: 'gray' },
+  pending: { label: 'Pendiente', color: 'yellow' },
+};
+```
+
+## Mapped Types
+
+Los mapped types transforman las propiedades de un tipo existente:
+
+```typescript
+type Mutable<T> = {
+  -readonly [K in keyof T]: T[K];
+};
+
+type Nullable<T> = {
+  [K in keyof T]: T[K] | null;
+};
+
+type User = { readonly id: string; name: string };
+type MutableUser = Mutable<User>;
+// { id: string; name: string; }
+```
+
+## Conditional Types
+
+Permiten elegir un tipo basándote en una condición:
+
+```typescript
+type IsArray<T> = T extends any[] ? true : false;
+
+type A = IsArray<string[]>; // true
+type B = IsArray<string>;   // false
+
+// Caso práctico: extraer el tipo de un array
+type UnpackArray<T> = T extends (infer Item)[] ? Item : T;
+
+type C = UnpackArray<string[]>; // string
+type D = UnpackArray<string>;   // string
+```
+
+### `infer` — el comodín de los conditional types
+
+```typescript
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+
+async function fetchUser(): Promise<{ id: string; name: string }> {
+  return { id: '1', name: 'Ivan' };
+}
+
+type UserData = Awaited<ReturnType<typeof fetchUser>>;
+// { id: string; name: string }
+```
+
+## Template Literal Types
+
+Combina strings de forma tipada:
+
+```typescript
+type EventName = 'click' | 'focus' | 'blur';
+type Handler = `on${Capitalize<EventName>}`;
+// 'onClick' | 'onFocus' | 'onBlur'
+
+type CSSProperty = 'margin' | 'padding';
+type CSSDirection = 'Top' | 'Right' | 'Bottom' | 'Left';
+type CSSKey = `${CSSProperty}${CSSDirection}`;
+// 'marginTop' | 'marginRight' | ... | 'paddingLeft'
+```
+
+## Discriminated Unions
+
+Un patrón fundamental para modelar estados:
+
+```typescript
+type ApiState<T> =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: string };
+
+function render<T>(state: ApiState<T>) {
+  switch (state.status) {
+    case 'loading': return <Spinner />;
+    case 'error':   return <Error msg={state.error} />;  // type-safe
+    case 'success': return <Data data={state.data} />;   // type-safe
+    default:        return null;
+  }
+}
+```
+
+TypeScript sabe exactamente qué propiedades están disponibles en cada branch.
+
+## Conclusión
+
+Dominar los tipos avanzados de TypeScript transforma la forma en que diseñas APIs. En lugar de documentación que se desactualiza, el tipo **es** la documentación y el compilador la verifica en cada cambio.
+
+El secreto es empezar con los utility types básicos y ir añadiendo complejidad cuando realmente la necesites.
