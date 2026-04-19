@@ -15,6 +15,10 @@
 
 # production
 /build
+/dist
+
+# astro — caché local y artefactos generados (no subir al repo)
+.astro/
 
 # misc
 .DS_Store
