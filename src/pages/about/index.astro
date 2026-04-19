@@ -15,12 +15,12 @@ import { stack, socialLinks } from '@/lib/data';
 
     <!-- Profile header -->
     <div class="flex items-start gap-6 mb-12 pb-12 border-b border-[#1f1f1f]">
-      <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#00ff88]/20 to-[#00ccff]/10 border border-[#00ff88]/20 flex items-center justify-center shrink-0">
-        <span class="text-2xl font-bold font-mono text-[#00ff88]">iv</span>
+      <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#f97316]/20 to-[#00ccff]/10 border border-[#f97316]/20 flex items-center justify-center shrink-0">
+        <span class="text-2xl font-bold font-mono text-[#f97316]">iv</span>
       </div>
       <div>
         <h1 class="text-2xl sm:text-3xl font-bold text-[#f0f0f0] mb-1">ivancidev</h1>
-        <p class="text-[#00ff88] font-mono text-sm mb-3">Full Stack Developer</p>
+        <p class="text-[#f97316] font-mono text-sm mb-3">Full Stack Developer</p>
         <div class="flex items-center gap-2 text-xs text-[#555] font-mono">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -94,7 +94,7 @@ import { stack, socialLinks } from '@/lib/data';
               <div class="flex items-center gap-2 flex-wrap mb-1">
                 <h3 class="font-medium text-[#f0f0f0]">{exp.role}</h3>
                 <span class="text-xs text-[#555]">@</span>
-                <span class="text-sm text-[#00ff88] font-mono">{exp.company}</span>
+                <span class="text-sm text-[#f97316] font-mono">{exp.company}</span>
               </div>
               <p class="text-xs font-mono text-[#444] mb-2">{exp.period}</p>
               <p class="text-sm text-[#666]">{exp.description}</p>
@@ -131,9 +131,9 @@ import { stack, socialLinks } from '@/lib/data';
             href={social.href}
             target={social.href.startsWith('mailto') ? '_self' : '_blank'}
             rel="noopener noreferrer"
-            class="group flex flex-col items-center gap-2 p-4 rounded-xl border border-[#1f1f1f] hover:border-[#00ff88]/30 bg-[#111]/50 hover:bg-[#111] transition-all"
+            class="group flex flex-col items-center gap-2 p-4 rounded-xl border border-[#1f1f1f] hover:border-[#f97316]/30 bg-[#111]/50 hover:bg-[#111] transition-all"
           >
-            <span class="text-[#555] group-hover:text-[#00ff88] transition-colors">
+            <span class="text-[#555] group-hover:text-[#f97316] transition-colors">
               {social.stroke ? (
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={social.icon} />
               ) : (
@@ -164,7 +164,7 @@ import { stack, socialLinks } from '@/lib/data';
         </a>
         <a
           href="#"
-          class="px-4 py-2 text-sm font-semibold bg-[#00ff88] text-black rounded-lg hover:bg-[#00cc6e] transition-colors"
+          class="px-4 py-2 text-sm font-semibold bg-[#f97316] text-black rounded-lg hover:bg-[#ea580c] transition-colors"
         >
           Descargar CV
         </a>

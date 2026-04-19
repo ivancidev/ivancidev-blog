@@ -50,7 +50,7 @@ const pageTitle = title === 'ivancidev — Full Stack Developer'
 <body class="bg-[#0a0a0a] text-[#f0f0f0] min-h-screen flex flex-col antialiased">
   <a
     href="#main-content"
-    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#00ff88] focus:text-black focus:font-semibold focus:rounded-lg focus:text-sm"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#f97316] focus:text-black focus:font-semibold focus:rounded-lg focus:text-sm"
   >
     Saltar al contenido
   </a>
@@ -60,4 +60,8 @@ const pageTitle = title === 'ivancidev — Full Stack Developer'
   </main>
   <Footer />
 </body>
+<script>
+  import AOS from 'aos';
+  AOS.init({ once: true, duration: 650, easing: 'ease-out-cubic', offset: 60 });
+</script>
 </html>

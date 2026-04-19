@@ -29,7 +29,7 @@ const posts = allPosts.sort(
       {posts.map((post) => (
         <a
           href={`/blog/${post.id}`}
-          class="group flex items-start justify-between p-5 rounded-xl border border-[#1f1f1f] hover:border-[#00ff88]/30 bg-[#111]/50 hover:bg-[#111] transition-all duration-200"
+          class="group flex items-start justify-between p-5 rounded-xl border border-[#1f1f1f] hover:border-[#f97316]/30 bg-[#111]/50 hover:bg-[#111] transition-all duration-200"
         >
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap gap-1.5 mb-2">
@@ -39,7 +39,7 @@ const posts = allPosts.sort(
                 </span>
               ))}
             </div>
-            <h2 class="font-semibold text-[#f0f0f0] group-hover:text-[#00ff88] transition-colors mb-1">{post.data.title}</h2>
+            <h2 class="font-semibold text-[#f0f0f0] group-hover:text-[#f97316] transition-colors mb-1">{post.data.title}</h2>
             <p class="text-sm text-[#555] leading-relaxed line-clamp-2 mb-3">{post.data.excerpt}</p>
             <div class="flex items-center gap-3 text-xs font-mono text-[#444]">
               <span>{post.data.date}</span>
@@ -48,7 +48,7 @@ const posts = allPosts.sort(
             </div>
           </div>
           <svg
-            class="w-4 h-4 text-[#333] group-hover:text-[#00ff88] transition-all shrink-0 mt-1 ml-6 group-hover:translate-x-1"
+            class="w-4 h-4 text-[#333] group-hover:text-[#f97316] transition-all shrink-0 mt-1 ml-6 group-hover:translate-x-1"
             fill="none" stroke="currentColor" viewBox="0 0 24 24"
           >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
