@@ -1,3 +1,4 @@
+@import 'aos/dist/aos.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,6 +20,13 @@
 :root {
   --font-sans: 'Geist', system-ui, sans-serif;
   --font-mono: 'GeistMono', 'Fira Code', monospace;
+
+  /* Design tokens — cambia solo aquí para actualizar todo el sitio */
+  --accent:       96 165 250;  /* #60a5fa — azul eléctrico, visible en dark */
+  --accent-hover: 59 130 246;  /* #3b82f6 */
+  --accent-hex:   #60a5fa;
+  --accent-hover-hex: #3b82f6;
+  --accent-light: #93c5fd;     /* variante clara para animaciones */
 }
 
 html {
@@ -44,13 +52,13 @@ pre {
   --tw-prose-body: #888;
   --tw-prose-headings: #f0f0f0;
   --tw-prose-lead: #aaa;
-  --tw-prose-links: #00ff88;
+  --tw-prose-links: var(--accent-hex);
   --tw-prose-bold: #f0f0f0;
   --tw-prose-counters: #555;
   --tw-prose-bullets: #444;
   --tw-prose-hr: #1f1f1f;
   --tw-prose-quotes: #aaa;
-  --tw-prose-quote-borders: #00ff88;
+  --tw-prose-quote-borders: var(--accent-hex);
   --tw-prose-captions: #555;
   --tw-prose-code: #e6edf3;
   --tw-prose-pre-code: #e6edf3;

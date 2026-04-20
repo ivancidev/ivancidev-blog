@@ -1,0 +1,202 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { devTools, devToolCategories } from '@/lib/data';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const allTools = devTools;
+---
+
+<Layout title={t('tools.title')} description={t('tools.desc')}>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+
+    <!-- Header -->
+    <div class="mb-10" data-aos="fade-up">
+      <div class="flex items-center gap-2 text-xs font-mono text-[#2d4268] mb-5">
+        <a href={lang === 'es' ? '/es' : '/'} class="hover:text-accent/60 transition-colors">home</a>
+        <span>/</span>
+        <span class="text-[#4a6494]">tools</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-bold text-[#e2eeff] mb-4 tracking-tight">{t('tools.title')}</h1>
+      <p class="text-[#4a6494] max-w-lg leading-relaxed">{t('tools.desc')}</p>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="flex flex-wrap gap-2 mb-10" data-aos="fade-up" data-aos-delay="60" id="filter-bar">
+      <button
+        data-filter="all"
+        class="filter-btn active px-4 py-1.5 rounded-full text-xs font-mono font-semibold transition-all duration-200 bg-accent text-white"
+      >
+        {t('tools.filter.all')} <span class="opacity-60 ml-1">{allTools.length}</span>
+      </button>
+      {devToolCategories.map((cat) => {
+        const count = allTools.filter(t => t.category === cat.id).length;
+        return count > 0 ? (
+          <button
+            data-filter={cat.id}
+            class="filter-btn px-4 py-1.5 rounded-full text-xs font-mono font-semibold transition-all duration-200 bg-[#080f1c] text-[#4a6494] hover:text-[#c8d8f0] hover:bg-[#0d1e35]"
+          >
+            {cat.label} <span class="opacity-50 ml-1">{count}</span>
+          </button>
+        ) : null;
+      })}
+    </div>
+
+    <!-- Tools grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="tools-grid">
+      {allTools.map((tool, i) => (
+        <button
+          class="tool-card group relative flex gap-3 p-4 rounded-2xl bg-[#080f1c] border border-[#1a2540] hover:border-accent/30 hover:bg-[#0a1425] transition-all duration-200 text-left w-full"
+          data-category={tool.category}
+          data-name={tool.name}
+          data-description={lang === 'en' ? tool.descriptionEn : tool.description}
+          data-url={tool.url ?? ""}
+          data-color={tool.color}
+          data-initials={tool.initials}
+          data-favorite={tool.favorite ? "true" : "false"}
+          data-aos="fade-up"
+          data-aos-delay={i * 30}
+        >
+          <div class="absolute left-0 top-4 bottom-4 w-[2px] rounded-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+          <div
+            class="shrink-0 w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold font-mono select-none"
+            style={`background-color: ${tool.color}22; color: ${tool.color};`}
+          >
+            {tool.initials}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="text-sm font-semibold text-[#c8d8f0] group-hover:text-accent transition-colors truncate">
+                {tool.name}
+              </span>
+              {tool.favorite && (
+                <svg class="w-3 h-3 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              )}
+            </div>
+            <p class="text-[11px] text-[#4a6494] leading-relaxed line-clamp-2">{lang === 'en' ? tool.descriptionEn : tool.description}</p>
+          </div>
+          <svg class="absolute top-3 right-3 w-3.5 h-3.5 text-[#1a2d4a] group-hover:text-accent/50 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      ))}
+    </div>
+
+    <p class="text-center text-xs font-mono text-[#1a2d4a] mt-12 pb-4" data-aos="fade-up">
+      {t('tools.updated')}
+    </p>
+
+  </div>
+</Layout>
+
+<!-- Modal -->
+<div id="tool-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 hidden" role="dialog" aria-modal="true" data-lang={lang}>
+  <div id="modal-backdrop" class="absolute inset-0 bg-[#020509]/80 backdrop-blur-sm"></div>
+  <div id="modal-panel" class="relative w-full max-w-md rounded-2xl bg-[#080f1c] border border-[#1a2540] p-6 shadow-[0_0_60px_rgba(0,0,0,0.6)] translate-y-4 sm:translate-y-0 opacity-0 transition-all duration-300">
+    <button id="modal-close" class="absolute top-4 right-4 text-[#2d4268] hover:text-[#8ba3c7] transition-colors p-1 rounded-lg hover:bg-[#0d1e35]" aria-label="Close">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <div class="flex items-center gap-4 mb-5">
+      <div id="modal-icon" class="w-12 h-12 rounded-2xl flex items-center justify-center text-sm font-bold font-mono shrink-0"></div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 id="modal-name" class="text-lg font-bold text-[#e2eeff]"></h2>
+          <span id="modal-favorite" class="hidden">
+            <svg class="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+          </span>
+        </div>
+        <span id="modal-category" class="text-[11px] font-mono text-accent/60 bg-accent/8 px-2 py-0.5 rounded-md"></span>
+      </div>
+    </div>
+    <p id="modal-description" class="text-sm text-[#6b80a8] leading-relaxed mb-6"></p>
+    <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white font-semibold text-sm rounded-xl hover:bg-accent-hover hover:scale-[1.02] transition-all duration-200 w-full justify-center">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>
+      {t('tools.visit')}
+    </a>
+    <div id="modal-nolink" class="hidden text-center text-xs font-mono text-[#2d4268] mt-4">{t('tools.noLink')}</div>
+  </div>
+</div>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.tool-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter!;
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'bg-accent', 'text-white');
+        b.classList.add('bg-[#080f1c]', 'text-[#4a6494]');
+      });
+      btn.classList.add('active', 'bg-accent', 'text-white');
+      btn.classList.remove('bg-[#080f1c]', 'text-[#4a6494]');
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  const modal = document.getElementById('tool-modal')!;
+  const backdrop = document.getElementById('modal-backdrop')!;
+  const panel = document.getElementById('modal-panel')!;
+  const closeBtn = document.getElementById('modal-close')!;
+  const modalIcon = document.getElementById('modal-icon')!;
+  const modalName = document.getElementById('modal-name')!;
+  const modalCategory = document.getElementById('modal-category')!;
+  const modalDescription = document.getElementById('modal-description')!;
+  const modalLink = document.getElementById('modal-link') as HTMLAnchorElement;
+  const modalNoLink = document.getElementById('modal-nolink')!;
+  const modalFavorite = document.getElementById('modal-favorite')!;
+
+  const isEn = modal.dataset.lang === 'en';
+  const categoryLabels: Record<string, string> = isEn
+    ? { Editor: 'Editor', Extensions: 'Extensions', CLI: 'CLI & Runtime', Browser: 'Browser', Design: 'Design', Productivity: 'Productivity', AI: 'AI & Automation' }
+    : { Editor: 'Editor', Extensions: 'Extensiones', CLI: 'CLI & Runtime', Browser: 'Navegador', Design: 'Diseño', Productivity: 'Productividad', AI: 'IA & Automatización' };
+
+  function openModal(card: HTMLElement) {
+    const color = card.dataset.color!;
+    modalIcon.style.backgroundColor = color + '22';
+    modalIcon.style.color = color;
+    modalIcon.textContent = card.dataset.initials!;
+    modalName.textContent = card.dataset.name!;
+    modalCategory.textContent = categoryLabels[card.dataset.category!] ?? card.dataset.category!;
+    modalDescription.textContent = card.dataset.description!;
+    modalFavorite.classList.toggle('hidden', card.dataset.favorite !== 'true');
+    const url = card.dataset.url!;
+    if (url) {
+      modalLink.href = url;
+      modalLink.classList.remove('hidden');
+      modalNoLink.classList.add('hidden');
+    } else {
+      modalLink.classList.add('hidden');
+      modalNoLink.classList.remove('hidden');
+    }
+    modal.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      panel.classList.remove('opacity-0', 'translate-y-4');
+      panel.classList.add('opacity-100', 'translate-y-0');
+    });
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    panel.classList.add('opacity-0', 'translate-y-4');
+    panel.classList.remove('opacity-100', 'translate-y-0');
+    setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 250);
+  }
+
+  cards.forEach(card => card.addEventListener('click', () => openModal(card)));
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>

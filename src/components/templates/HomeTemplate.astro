@@ -1,0 +1,283 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const base = lang === 'es' ? '/es' : '';
+
+const allPosts = await getCollection('blog');
+const featuredPosts = allPosts
+  .filter(p => lang === 'es' ? p.id.startsWith('es/') : !p.id.startsWith('es/'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+---
+
+<Layout>
+
+  <!-- HERO -->
+  <section class="relative w-full overflow-hidden pt-20 pb-28">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#07101f] via-[#05080f] to-[#05080f]" />
+    <div class="absolute top-0 right-0 w-[700px] h-[700px] bg-accent/15 rounded-full blur-[160px] pointer-events-none" />
+    <div class="absolute top-10 left-0 w-96 h-96 bg-accent/8 rounded-full blur-[100px] pointer-events-none" />
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-t from-[#05080f] to-transparent pointer-events-none" />
+
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+
+        <!-- Text -->
+        <div class="order-2 lg:order-1">
+
+          <!-- Greeting -->
+          <p
+            class="text-[#7a8fb5] text-lg font-medium mb-3"
+            data-aos="fade-up"
+            data-aos-delay="60"
+          >
+            {t('home.greeting')}
+          </p>
+
+          <!-- Name -->
+          <h1
+            class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-none mb-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <span class="bg-gradient-to-r from-[#93c5fd] via-accent to-[#60a5fa] bg-clip-text text-transparent">ivancidev</span>
+          </h1>
+
+          <!-- Role badges -->
+          <div class="flex flex-wrap gap-2 mb-7" data-aos="fade-up" data-aos-delay="140">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-semibold bg-accent/10 text-accent/80 border border-accent/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent/60"></span>
+              Full Stack
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-semibold bg-[#8b5cf6]/10 text-[#a78bfa]/80 border border-[#8b5cf6]/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#a78bfa]/60"></span>
+              AI Automation
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-semibold bg-[#22c55e]/10 text-[#4ade80]/80 border border-[#22c55e]/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#4ade80]/60 shadow-[0_0_6px_rgba(34,197,94,0.8)]"></span>
+              Open to work
+            </span>
+          </div>
+
+          <!-- Bio -->
+          <p
+            class="text-[#6b80a8] text-base sm:text-lg leading-relaxed mb-9"
+            data-aos="fade-up"
+            data-aos-delay="180"
+            set:html={t('home.bio')}
+          />
+
+          <!-- CTA buttons -->
+          <div class="flex items-center gap-3 mb-5" data-aos="fade-up" data-aos-delay="220">
+            <a
+              href={`${base}/blog`}
+              class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold text-sm rounded-xl hover:bg-accent-hover hover:scale-[1.03] transition-all duration-200 shadow-[0_0_24px_rgba(96,165,250,0.25)]"
+            >
+              {t('home.cta.blog')}
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href={`${base}/about`}
+              class="inline-flex items-center gap-2 px-5 py-3 text-[#8ba3c7] hover:text-[#c8d8f0] bg-[#0d1e35] hover:bg-[#1a2d4a] border border-[#1a2540] hover:border-accent/30 text-sm rounded-xl transition-all duration-200 font-medium"
+            >
+              {t('home.cta.about')}
+            </a>
+          </div>
+
+          <!-- Social links -->
+          <div class="flex items-center gap-4" data-aos="fade-up" data-aos-delay="260">
+            <a
+              href="https://github.com/ivancidev"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-sm text-[#4a6494] hover:text-[#8ba3c7] transition-colors font-mono group"
+            >
+              <svg class="w-4 h-4 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+              @ivancidev
+            </a>
+            <span class="text-[#1a2d4a]">·</span>
+            <a
+              href="https://www.linkedin.com/in/herlan-herbas-zubieta/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-sm text-[#4a6494] hover:text-[#8ba3c7] transition-colors font-mono group"
+            >
+              <svg class="w-4 h-4 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Photo -->
+        <div class="order-1 lg:order-2 flex justify-center" data-aos="fade-left" data-aos-delay="100">
+          <div class="photo-wrapper relative w-64 sm:w-72 lg:w-[310px] h-[360px] sm:h-[400px] lg:h-[430px]">
+            <div class="photo-glow absolute -inset-6 bg-accent/25 blur-[80px] rounded-3xl" />
+            <div class="relative h-full rounded-3xl overflow-hidden border border-accent/20 shadow-[0_0_60px_rgba(96,165,250,0.2)]">
+              <img
+                src="https://res.cloudinary.com/dvzddtmwg/image/upload/v1775436535/66ac3488-519d-44fc-b836-6433a4d321aa_qesck0.png"
+                alt="ivancidev — Full Stack Developer"
+                width="400" height="520"
+                class="w-full h-full object-cover object-top"
+                loading="eager"
+              />
+              <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#07101f]/60 to-transparent" />
+              <div class="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#07101f] via-[#07101f]/75 to-transparent" />
+              <div class="absolute bottom-0 left-0 right-0 p-5">
+                <p class="font-mono text-xs text-accent/70 mb-3">
+                  <span class="text-accent">const</span> dev = <span class="text-[#93c5fd]">"full-stack"</span>;
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#07101f]/80 border border-accent/20 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.9)]" aria-hidden="true" />
+                    <span class="text-[10px] font-mono text-[#7a8fb5]">online</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-accent/40">@ivancidev</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REST -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+    <!-- STATS -->
+    <section class="mb-16" data-aos="fade-up">
+      <div class="grid grid-cols-3 gap-px bg-[#0d1e35] rounded-2xl overflow-hidden">
+        {[
+          { value: `${allPosts.filter(p => !p.id.startsWith('es/')).length}+`, label: t('stats.articles') },
+          { value: "10+", label: t('stats.projects') },
+          { value: "2+", label: t('stats.years') },
+        ].map((stat) => (
+          <div class="bg-[#07101f] text-center py-8 px-4 hover:bg-[#091628] transition-colors">
+            <div class="text-3xl sm:text-4xl font-bold font-mono text-accent mb-2">{stat.value}</div>
+            <div class="text-xs text-[#4a6494] tracking-wide uppercase">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FEATURED POSTS -->
+    <section class="mb-16">
+      <div class="flex items-center justify-between mb-6" data-aos="fade-up">
+        <div>
+          <h2 class="text-xl font-bold text-[#e2eeff]">{t('home.posts.title')}</h2>
+          <p class="text-sm text-[#4a6494] mt-0.5">{t('home.posts.subtitle')}</p>
+        </div>
+        <a
+          href={`${base}/blog`}
+          class="inline-flex items-center gap-1 text-sm font-medium text-[#4a6494] hover:text-accent transition-colors duration-200"
+        >
+          {t('home.posts.viewAll')}
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {featuredPosts.map((post, i) => (
+          <a
+            href={`${base}/blog/${post.id.replace('es/', '')}`}
+            class="group flex flex-col rounded-2xl bg-[#080f1c] border border-[#1a2540] hover:border-accent/35 overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(96,165,250,0.07)]"
+            data-aos="fade-up"
+            data-aos-delay={i * 70}
+          >
+            {post.data.image ? (
+              <div class="relative w-full h-40 overflow-hidden shrink-0">
+                <img
+                  src={post.data.image}
+                  alt={post.data.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#080f1c] via-transparent to-transparent" />
+              </div>
+            ) : (
+              <div class="w-full h-40 bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center shrink-0">
+                <svg class="w-8 h-8 text-accent/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+            )}
+            <div class="flex flex-col flex-1 p-4">
+              <div class="flex flex-wrap gap-1.5 mb-2">
+                {post.data.tags.slice(0, 2).map((tag: string) => (
+                  <span class="text-[10px] px-2 py-0.5 rounded-full font-mono bg-accent/8 text-accent/60">{tag}</span>
+                ))}
+              </div>
+              <h3 class="font-semibold text-[#c8d8f0] group-hover:text-accent transition-colors text-sm leading-snug mb-2 line-clamp-2">
+                {post.data.title}
+              </h3>
+              <p class="text-xs text-[#4a6494] line-clamp-2 leading-relaxed flex-1">
+                {post.data.excerpt}
+              </p>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-[#1a2540]">
+                <div class="flex items-center gap-2 text-xs font-mono text-[#2d4268]">
+                  <span>{post.data.date}</span>
+                  <span class="text-[#1a2d4a]">·</span>
+                  <span>{post.data.readTime}</span>
+                </div>
+                <svg class="w-3.5 h-3.5 text-[#2d4268] group-hover:text-accent group-hover:translate-x-1 transition-all duration-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="pb-24" data-aos="fade-up">
+      <div class="relative p-8 sm:p-10 rounded-2xl bg-[#080f1c] overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-accent/15 rounded-full blur-3xl pointer-events-none" />
+        <div class="absolute bottom-0 left-0 w-56 h-56 bg-accent/8 rounded-full blur-2xl pointer-events-none" />
+        <div class="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-[#c8d8f0] mb-2">{t('home.contact.title')}</h2>
+            <p class="text-[#4a6494] max-w-sm leading-relaxed">{t('home.contact.desc')}</p>
+          </div>
+          <a
+            href="mailto:herlanherbas@gmail.com"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent to-accent-hover text-white font-semibold text-sm rounded-xl shadow-[0_0_20px_rgba(96,165,250,0.35)] hover:shadow-[0_0_40px_rgba(96,165,250,0.6)] hover:scale-[1.03] transition-all duration-200 shrink-0"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            {t('home.contact.btn')}
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<style>
+  .photo-wrapper { animation: float 6s ease-in-out infinite; }
+  .photo-glow { animation: glow-pulse 4s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-10px); }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.08); }
+  }
+</style>

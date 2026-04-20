@@ -1,20 +1,21 @@
 ---
-title: "Arquitectura de diseño con Tailwind CSS"
-excerpt: "Cómo organizar tus estilos con Tailwind sin volverte loco: design tokens, componentes reutilizables y patrones escalables."
-date: "2025-02-10"
+title: "Design Architecture with Tailwind CSS"
+excerpt: "How to organize your Tailwind styles without going crazy: design tokens, reusable components and scalable patterns."
+date: "2026-04-18"
 readTime: "6 min"
 tags: ["Tailwind CSS", "CSS", "Design"]
+image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1776636378/lucid-origin_Split_screen_left_side_chaotic_messy_colorful_CSS_code_exploding_outward_right_s-0_b9acqe.jpg"
 ---
 
-## El problema de escala
+## The Scaling Problem
 
-Tailwind es increíblemente productivo al principio. Pero en proyectos grandes, sin una estrategia clara, terminas con clases repetidas en 30 lugares y un botón que tiene 15 variantes definidas de forma inconsistente.
+Tailwind is incredibly productive at first. But in large projects, without a clear strategy, you end up with classes repeated in 30 places and a button with 15 inconsistently defined variants.
 
-La solución no es abandonar Tailwind — es darle estructura.
+The solution isn't to abandon Tailwind — it's to give it structure.
 
-## Design Tokens como fuente de verdad
+## Design Tokens as Source of Truth
 
-Antes de escribir una sola clase, define tus tokens en `tailwind.config.js`:
+Before writing a single class, define your tokens in `tailwind.config.js`:
 
 ```js
 // tailwind.config.js
@@ -23,8 +24,8 @@ export default {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#00ff88',
-          hover: '#00cc6e',
+          DEFAULT: '#f97316',
+          hover: '#ea580c',
           muted: 'rgb(0 255 136 / 0.1)',
         },
         surface: {
@@ -46,11 +47,11 @@ export default {
 };
 ```
 
-Ahora en lugar de `bg-[#00ff88]` en 50 lugares, usas `bg-brand`. Si el color cambia, cambias un solo sitio.
+Now instead of `bg-[#f97316]` in 50 places, you use `bg-brand`. If the color changes, you change one place.
 
-## Componentes con @apply
+## Components with @apply
 
-Para elementos muy repetidos, `@apply` en tu CSS es una solución válida:
+For highly repeated elements, `@apply` in your CSS is a valid solution:
 
 ```css
 /* components.css */
@@ -69,38 +70,38 @@ Para elementos muy repetidos, `@apply` en tu CSS es una solución válida:
 }
 ```
 
-Úsalo con moderación — el objetivo es extraer patrones **realmente** repetidos, no cada botón que ves.
+Use it in moderation — the goal is to extract **really** repeated patterns, not every button you see.
 
-## Convención de variantes
+## Variant Convention
 
-Define variantes consistentes para elementos interactivos:
+Define consistent variants for interactive elements:
 
 ```
-Estado base:     text-[#888]  border-[#1f1f1f]  bg-[#111]/50
-Estado hover:    text-[#f0f0f0]  border-[#333]  bg-[#111]
-Estado activo:   text-[#00ff88]  border-[#00ff88]/20
-Estado disabled: text-[#333]  cursor-not-allowed opacity-50
+Base state:     text-[#888]  border-[#1f1f1f]  bg-[#111]/50
+Hover state:    text-[#f0f0f0]  border-[#333]  bg-[#111]
+Active state:   text-[#f97316]  border-[#f97316]/20
+Disabled state: text-[#333]  cursor-not-allowed opacity-50
 ```
 
-Documentar esto en un archivo `DESIGN.md` o en tu Storybook evita inconsistencias entre componentes.
+Documenting this in a `DESIGN.md` file or your Storybook prevents inconsistencies between components.
 
-## Organización de archivos
+## File Organization
 
 ```
 src/
   styles/
     global.css      → @tailwind directives, @font-face, reset
-    components.css  → @apply para patrones muy repetidos
+    components.css  → @apply for heavily repeated patterns
   components/
     ui/
-      Button.tsx    → Variantes con class-variance-authority
+      Button.tsx    → Variants with class-variance-authority
       Card.tsx
       Badge.tsx
 ```
 
 ### class-variance-authority (CVA)
 
-Para componentes con variantes en React/Vue, CVA es superior a concatenar strings:
+For components with variants in React/Vue, CVA is superior to concatenating strings:
 
 ```tsx
 import { cva } from 'class-variance-authority';
@@ -110,7 +111,7 @@ const button = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-[#00ff88] text-black hover:bg-[#00cc6e]',
+        primary: 'bg-[#f97316] text-black hover:bg-[#ea580c]',
         ghost: 'text-[#888] border border-[#1f1f1f] hover:text-[#f0f0f0] hover:border-[#333]',
       },
       size: {
@@ -123,6 +124,6 @@ const button = cva(
 );
 ```
 
-## Conclusión
+## Conclusion
 
-Tailwind escala bien cuando tienes tokens bien definidos, convenciones claras de estado, y extraes abstracciones solo cuando realmente hay repetición. La clave es que las decisiones de diseño vivan en el config, no dispersas en el markup.
+Tailwind scales well when you have well-defined tokens, clear state conventions, and extract abstractions only when there's real repetition. The key is that design decisions live in the config, not scattered throughout the markup.
