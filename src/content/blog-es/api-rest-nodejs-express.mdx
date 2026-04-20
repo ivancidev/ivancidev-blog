@@ -1,30 +1,30 @@
 ---
-title: "Building a Robust REST API with Node.js and Express"
-excerpt: "From zero to production: authentication, validation, error handling and best practices for modern APIs."
+title: "Construyendo una API REST robusta con Node.js y Express"
+excerpt: "Desde cero hasta producción: autenticación, validación, manejo de errores y buenas prácticas para APIs modernas."
 date: "2026-04-12"
 readTime: "15 min"
 tags: ["Node.js", "Express", "API"]
 image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1776635877/lucid-origin_A_glowing_green_server_terminal_screen_showing_HTTP_routes_GET_POST_DELETE_cable-0_uoerqt.jpg"
 ---
 
-## Project Structure
+## Estructura del proyecto
 
-A well-structured API is maintainable long-term. This is the organization I use in real projects:
+Una API bien estructurada es mantenible a largo plazo. Esta es la organización que uso en proyectos reales:
 
 ```
 src/
-  routes/          → Endpoint definitions
-  controllers/     → Logic for each endpoint
-  services/        → Business logic
-  middleware/      → Auth, validation, errors
-  models/          → DB schemas
+  routes/          → Definición de endpoints
+  controllers/     → Lógica de cada endpoint
+  services/        → Lógica de negocio
+  middleware/      → Auth, validación, errores
+  models/          → Esquemas de BD
   lib/             → DB connection, config
-  types/           → TypeScript types
+  types/           → Tipos TypeScript
 ```
 
-The `controller → service` separation is key: the controller handles HTTP, the service handles the logic.
+La separación `controller → service` es clave: el controller maneja HTTP, el service maneja la lógica.
 
-## Initial Setup
+## Setup inicial
 
 ```typescript
 // src/app.ts
@@ -41,14 +41,14 @@ app.use(cors({ origin: process.env.ALLOWED_ORIGINS?.split(',') }));
 app.use(express.json({ limit: '10kb' }));
 
 app.use('/api/v1', router);
-app.use(errorHandler); // Always last
+app.use(errorHandler); // Siempre al final
 
 export { app };
 ```
 
-## Request Validation
+## Validación de requests
 
-Use `zod` to validate the body before it reaches the controller:
+Usa `zod` para validar el body antes de que llegue al controller:
 
 ```typescript
 // src/middleware/validate.ts
@@ -69,7 +69,7 @@ export function validate(schema: ZodSchema) {
   };
 }
 
-// Usage in route:
+// Uso en la ruta:
 const createUserSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
@@ -79,9 +79,9 @@ const createUserSchema = z.object({
 router.post('/users', validate(createUserSchema), userController.create);
 ```
 
-## Centralized Error Handling
+## Manejo de errores centralizado
 
-Define custom error classes and a global handler:
+Define clases de error propias y un handler global:
 
 ```typescript
 // src/lib/errors.ts
@@ -120,9 +120,9 @@ export function errorHandler(
 }
 ```
 
-Now in any controller you can do `throw new NotFoundError('User')` and the handler catches it.
+Ahora en cualquier controller puedes hacer `throw new NotFoundError('User')` y el handler lo captura.
 
-## JWT Authentication
+## Autenticación con JWT
 
 ```typescript
 // src/middleware/auth.ts
@@ -145,15 +145,15 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
 }
 ```
 
-## Rate Limiting
+## Rate limiting
 
-Protect sensitive endpoints:
+Protege endpoints sensibles:
 
 ```typescript
 import rateLimit from 'express-rate-limit';
 
 export const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, // 15 minutos
   max: 10,
   message: { error: 'Too many attempts, try again later' },
 });
@@ -161,9 +161,9 @@ export const authLimiter = rateLimit({
 router.post('/auth/login', authLimiter, authController.login);
 ```
 
-## Consistent Responses
+## Respuestas consistentes
 
-Define a fixed format for all responses:
+Define un formato fijo para todas las respuestas:
 
 ```typescript
 // src/lib/response.ts
@@ -176,6 +176,6 @@ export function paginated<T>(res: Response, data: T[], meta: PaginationMeta) {
 }
 ```
 
-## Conclusion
+## Conclusión
 
-A robust API isn't just code that works — it's code that fails predictably, validates at the edges, and is readable for the next developer. The patterns in this article (validation with Zod, typed errors, consistent responses) are what make the difference between a prototype and production code.
+Una API robusta no es solo código que funciona — es código que falla de forma predecible, valida en los bordes, y es legible para el siguiente dev. Los patrones de este artículo (validación con Zod, errores tipados, respuestas consistentes) son los que marcan la diferencia entre un prototipo y código de producción.

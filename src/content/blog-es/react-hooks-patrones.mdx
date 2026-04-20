@@ -1,17 +1,17 @@
 ---
-title: "Advanced Patterns with React Hooks"
-excerpt: "Custom hooks, hook composition, and patterns like useReducer with Context to manage complex state without Redux."
+title: "Patrones avanzados con React Hooks"
+excerpt: "Custom hooks, composición de hooks, y patrones como useReducer con Context para manejar estado complejo sin Redux."
 date: "2026-04-16"
 readTime: "11 min"
 tags: ["React", "Hooks", "JavaScript"]
 image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1776635876/lucid-origin_Dark_tech_blog_cover_abstract_React_component_tree_with_glowing_orange_hooks_con-0_wx9tbw.jpg"
 ---
 
-## Custom Hooks: Extracting Reusable Logic
+## Custom Hooks: extrayendo lógica reutilizable
 
-The golden rule: if you have stateful logic that appears in more than one component, it's a candidate for a custom hook.
+La regla de oro: si tienes lógica con estado que aparece en más de un componente, es candidata a ser un custom hook.
 
-### useFetch — the classic
+### useFetch — el clásico
 
 ```typescript
 function useFetch<T>(url: string) {
@@ -36,7 +36,7 @@ function useFetch<T>(url: string) {
   return { data, loading, error };
 }
 
-// Usage:
+// Uso:
 function UserProfile({ id }: { id: string }) {
   const { data, loading, error } = useFetch<User>(`/api/users/${id}`);
   if (loading) return <Spinner />;
@@ -70,9 +70,9 @@ function useLocalStorage<T>(key: string, initial: T) {
 }
 ```
 
-## useReducer + Context: Global State Without Redux
+## useReducer + Context: estado global sin Redux
 
-For moderately complex global state, `useReducer` with Context is enough and doesn't require external dependencies.
+Para estado global moderadamente complejo, `useReducer` con Context es suficiente y no requiere dependencias externas.
 
 ```typescript
 // store/theme.tsx
@@ -108,9 +108,9 @@ export function useTheme() {
 }
 ```
 
-## Hook Composition
+## Composición de hooks
 
-Hooks compose naturally — you can build complex hooks from simple ones:
+Los hooks se componen naturalmente — puedes construir hooks complejos a partir de simples:
 
 ```typescript
 function useUserData(userId: string) {
@@ -125,18 +125,18 @@ function useUserData(userId: string) {
 }
 ```
 
-## useCallback and useMemo — When to Use Them
+## useCallback y useMemo — cuándo usarlos
 
-The rule: use them when the cost of recomputing is greater than the cost of comparing.
+La regla: úsalos cuando el costo de recomputar es mayor que el costo de comparar.
 
 ```typescript
-// ✅ Use useMemo — expensive calculation
+// ✅ Sí usar useMemo — cálculo costoso
 const sortedItems = useMemo(
   () => items.sort((a, b) => b.score - a.score),
   [items]
 );
 
-// ✅ Use useCallback — function passed to memoized component
+// ✅ Sí usar useCallback — función pasada a componente memoizado
 const handleSubmit = useCallback(
   (data: FormData) => {
     mutate(data);
@@ -144,19 +144,19 @@ const handleSubmit = useCallback(
   [mutate]
 );
 
-// ❌ Not needed — calculation is trivial
+// ❌ No necesario — el cálculo es trivial
 const doubled = useMemo(() => count * 2, [count]);
 ```
 
-## useRef Beyond DOM Refs
+## useRef más allá de los DOM refs
 
-`useRef` stores mutable values that should not trigger re-renders:
+`useRef` almacena valores mutables que no deben triggear re-renders:
 
 ```typescript
 function useInterval(callback: () => void, delay: number) {
   const savedCallback = useRef(callback);
 
-  // Update the ref without re-render
+  // Actualizar la referencia sin re-render
   useEffect(() => {
     savedCallback.current = callback;
   });
@@ -168,8 +168,8 @@ function useInterval(callback: () => void, delay: number) {
 }
 ```
 
-## Conclusion
+## Conclusión
 
-Hooks change how you think in React: instead of "which lifecycle method do I use here", you think "what effect does this value have". Composition is the real superpower — small, focused hooks that combine into complex behaviors.
+Los hooks cambian la forma de pensar en React: en lugar de "qué lifecycle method uso aquí", piensas en "qué efecto tiene este valor". La composición es el superpoder real — hooks pequeños y enfocados que se combinan en comportamientos complejos.
 
-The `useReducer + Context` pattern covers 80% of cases where you would have previously reached for Redux. Start simple and add complexity only when you need it.
+El patrón `useReducer + Context` cubre el 80% de los casos donde antes hubieras alcanzado para Redux. Empieza simple y añade complejidad solo cuando la necesites.
