@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const base = lang === 'es' ? '/es' : '';
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .filter(p => lang === 'es' ? p.id.startsWith('es/') : !p.id.startsWith('es/'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout title={t('blog.title')} description={t('blog.desc')}>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+
+    <!-- Header -->
+    <div class="mb-12" data-aos="fade-up">
+      <div class="flex items-center gap-2 text-xs font-mono text-[#2d4268] mb-5">
+        <a href={lang === 'es' ? '/es' : '/'} class="hover:text-accent/60 transition-colors">home</a>
+        <span>/</span>
+        <span class="text-[#4a6494]">blog</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-bold text-[#e2eeff] mb-4 tracking-tight">{t('blog.title')}</h1>
+      <p class="text-[#4a6494] max-w-xl text-base leading-relaxed">{t('blog.desc')}</p>
+    </div>
+
+    <!-- Contador -->
+    <div class="flex items-center gap-3 mb-8" data-aos="fade-up" data-aos-delay="40">
+      <span class="text-xs font-mono text-[#2d4268] bg-[#080f1c] border border-[#1a2540] px-3 py-1 rounded-full">
+        {posts.length} {t('blog.count')}
+      </span>
+    </div>
+
+    <!-- Posts -->
+    <div class="space-y-5">
+      {posts.map((post, i) => (
+        <a
+          href={`${base}/blog/${post.id.replace('es/', '')}`}
+          class="group block rounded-2xl bg-[#080f1c] border border-[#1a2540] hover:border-accent/30 overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(96,165,250,0.07)]"
+          data-aos="fade-up"
+          data-aos-delay={i * 60}
+        >
+          {post.data.image && (
+            <div class="relative w-full h-44 sm:h-52 overflow-hidden">
+              <img
+                src={post.data.image}
+                alt={post.data.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#080f1c] via-[#080f1c]/30 to-transparent" />
+              <span class="absolute top-3 left-3 text-xs font-bold font-mono text-[#2d4268] bg-[#080f1c]/80 backdrop-blur-sm px-2 py-0.5 rounded-md">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            </div>
+          )}
+
+          <div class="p-5">
+            <div class="flex flex-wrap gap-1.5 mb-3">
+              {post.data.tags.map((tag: string) => (
+                <span class="text-[11px] px-2.5 py-0.5 rounded-full font-mono font-medium bg-accent/8 text-accent/60">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex items-start justify-between gap-3">
+              <h2 class="font-semibold text-[#c8d8f0] group-hover:text-accent transition-colors text-lg leading-snug">
+                {post.data.title}
+              </h2>
+              <span class="shrink-0 mt-0.5 text-[#2d4268] group-hover:text-accent group-hover:translate-x-1 transition-all duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </div>
+
+            <p class="text-sm text-[#4a6494] leading-relaxed line-clamp-2 mt-1.5 mb-4">
+              {post.data.excerpt}
+            </p>
+
+            <div class="flex items-center gap-2 text-xs font-mono text-[#2d4268]">
+              <span>{post.data.date}</span>
+              <span class="text-[#1a2d4a]">·</span>
+              <span>{post.data.readTime} {t('blog.readTime')}</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</Layout>

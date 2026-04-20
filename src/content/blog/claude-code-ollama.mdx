@@ -1,0 +1,159 @@
+---
+title: "Running Claude Code locally with Ollama"
+excerpt: "How to set up Ollama to run AI models locally and integrate them into your development workflow alongside Claude Code."
+date: "2026-04-19"
+readTime: "8 min"
+tags: ["Claude Code", "Ollama", "AI", "CLI"]
+image: "https://res.cloudinary.com/dvzddtmwg/image/upload/v1776649749/a-cinematic-tech-illustration-of-a-dark-_cNL7mV9NQ-OgOIjWgao2cg_EXtuF0nkSSus38O4AoEB9g_cover_ij2bwh.jpg"
+---
+
+## What is Ollama?
+
+[Ollama](https://ollama.com) is an open-source tool that lets you run large language models locally on your own machine — no API keys, no internet connection, no usage costs. It wraps models like `llama3`, `deepseek-coder`, `qwen2.5-coder` and many others into a simple CLI and a local HTTP server.
+
+Think of it as Docker, but for AI models.
+
+## What is Claude Code?
+
+[Claude Code](https://docs.anthropic.com/en/docs/claude-code) is Anthropic's official CLI tool for agentic coding. It connects to Claude's API and can read your codebase, write files, run commands and work autonomously on complex tasks directly from your terminal.
+
+## Why use both?
+
+Claude Code and Ollama serve different roles:
+
+- **Claude Code** → best for complex reasoning, architecture decisions, multi-file refactors and tasks that need the full power of Claude Sonnet or Opus
+- **Ollama** → best for quick, offline completions, privacy-sensitive codebases, or when you want zero latency without API costs
+
+Using both gives you flexibility: reach for Claude Code when you need the best results, and Ollama when you're offline, iterating fast, or working with sensitive code that can't leave your machine.
+
+## Installing Ollama
+
+```bash
+# macOS / Linux
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Or download the macOS app from https://ollama.com/download
+```
+
+Verify it's running:
+
+```bash
+ollama --version
+```
+
+## Pulling a coding model
+
+```bash
+# Great for code — fast and capable
+ollama pull qwen2.5-coder:7b
+
+# Larger, more powerful option
+ollama pull deepseek-coder-v2:16b
+
+# General purpose with strong code support
+ollama pull llama3.1:8b
+```
+
+List your installed models:
+
+```bash
+ollama list
+```
+
+## Running a model in the terminal
+
+```bash
+# Interactive chat
+ollama run qwen2.5-coder:7b
+
+# One-shot prompt
+ollama run qwen2.5-coder:7b "Explain this function: $(cat src/utils/format.ts)"
+```
+
+## Using Ollama's API
+
+Ollama exposes an OpenAI-compatible REST API on `http://localhost:11434`. You can query it directly:
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "qwen2.5-coder:7b",
+  "prompt": "Write a TypeScript function to debounce a callback",
+  "stream": false
+}'
+```
+
+Or use the OpenAI-compatible endpoint:
+
+```bash
+curl http://localhost:11434/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen2.5-coder:7b",
+    "messages": [{ "role": "user", "content": "Explain useEffect in React" }]
+  }'
+```
+
+## Integrating with VS Code via Continue
+
+[Continue](https://continue.dev) is a VS Code and JetBrains extension that turns any local model into an in-editor AI assistant. It works natively with Ollama.
+
+Install Continue from the VS Code marketplace, then configure it in `.continue/config.json`:
+
+```json
+{
+  "models": [
+    {
+      "title": "Qwen 2.5 Coder (local)",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "apiBase": "http://localhost:11434"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen autocomplete",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:7b"
+  }
+}
+```
+
+Now you get inline completions and chat inside VS Code — fully local, fully private.
+
+## My hybrid workflow
+
+```
+Quick questions / offline work     → Ollama (Continue in VS Code)
+Complex refactors / new features   → Claude Code (Anthropic API)
+Code review / architecture         → Claude Code
+Sensitive / private codebases      → Ollama
+```
+
+The key insight: you don't have to choose. Claude Code handles the heavy lifting and Ollama handles the day-to-day without burning tokens.
+
+## Useful Ollama commands
+
+```bash
+# Start the Ollama server manually
+ollama serve
+
+# See running models
+ollama ps
+
+# Remove a model
+ollama rm deepseek-coder-v2:16b
+
+# Pull a specific version
+ollama pull qwen2.5-coder:14b
+```
+
+## Conclusion
+
+Running AI locally with Ollama is not a replacement for Claude Code — it's a complement. Local models give you privacy, zero cost and instant responses for routine tasks. Claude Code gives you the reasoning power of frontier models when it actually matters.
+
+Set up both, define when to use each, and you'll have the best of both worlds in your dev workflow.
+
+**Resources:**
+- [Ollama docs](https://ollama.com/docs)
+- [Claude Code docs](https://docs.anthropic.com/en/docs/claude-code)
+- [Continue extension](https://continue.dev)
+- [Ollama model library](https://ollama.com/library)

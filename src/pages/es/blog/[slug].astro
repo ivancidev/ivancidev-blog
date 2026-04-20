@@ -6,9 +6,9 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts
-    .filter(p => !p.id.startsWith('es/'))
+    .filter(p => p.id.startsWith('es/'))
     .map((post) => ({
-      params: { slug: post.id },
+      params: { slug: post.id.replace('es/', '') },
       props: { post },
     }));
 }
@@ -24,30 +24,27 @@ const { Content } = await render(post);
 
 const allPosts = await getCollection('blog');
 const relatedPosts = allPosts
-  .filter(p => !p.id.startsWith('es/') && p.id !== post.id)
+  .filter(p => p.id.startsWith('es/') && p.id !== post.id)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .slice(0, 3);
 ---
 
 <Layout title={post.data.title} description={post.data.excerpt}>
 
-  <!-- Hero header with gradient + cover image -->
   <div class="relative w-full overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-[#060d1f] via-[#080f22] to-[#05080f]" />
     <div class="absolute top-0 left-1/4 w-96 h-64 bg-accent/15 rounded-full blur-[100px]" />
     <div class="absolute top-0 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
 
     <div class="relative max-w-3xl mx-auto px-4 sm:px-6 pt-12 pb-0">
-      <!-- Breadcrumb -->
       <div class="flex items-center gap-2 text-xs font-mono text-accent/40 mb-8">
-        <a href="/" class="hover:text-accent/70 transition-colors">home</a>
+        <a href="/es" class="hover:text-accent/70 transition-colors">home</a>
         <span>/</span>
-        <a href="/blog" class="hover:text-accent/70 transition-colors">blog</a>
+        <a href="/es/blog" class="hover:text-accent/70 transition-colors">blog</a>
         <span>/</span>
-        <span class="text-accent/60 truncate max-w-[200px]">{post.id}</span>
+        <span class="text-accent/60 truncate max-w-[200px]">{post.id.replace('es/', '')}</span>
       </div>
 
-      <!-- Tags -->
       <div class="flex flex-wrap gap-2 mb-5">
         {post.data.tags.map((tag) => (
           <span class="text-xs px-3 py-1 rounded-full font-mono bg-accent/10 text-accent/80 border border-accent/20">
@@ -56,19 +53,16 @@ const relatedPosts = allPosts
         ))}
       </div>
 
-      <!-- Title -->
       <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-5 bg-gradient-to-br from-[#f0f0f0] via-[#c8d8f0] to-accent bg-clip-text text-transparent">
         {post.data.title}
       </h1>
 
-      <!-- Meta -->
       <div class="flex items-center gap-4 text-sm text-accent/50 font-mono mb-8">
         <span>{post.data.date}</span>
         <span class="text-accent/20">·</span>
         <span>{post.data.readTime} {t('blog.readTime')}</span>
       </div>
 
-      <!-- Cover image -->
       {post.data.image && (
         <div class="relative rounded-t-2xl overflow-hidden h-64 sm:h-80">
           <img
@@ -84,8 +78,6 @@ const relatedPosts = allPosts
   </div>
 
   <div class="max-w-3xl mx-auto px-4 sm:px-6 pb-16 pt-10">
-
-    <!-- Content -->
     <div class="prose prose-dark max-w-none
       prose-headings:font-bold prose-headings:tracking-tight
       prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
@@ -98,20 +90,18 @@ const relatedPosts = allPosts
       prose-blockquote:border-l-accent prose-blockquote:text-[#aaa]
       prose-li:text-[#888]
     ">
-      <!-- Excerpt lead -->
       <p class="text-lg text-[#aaa] leading-relaxed border-l-2 border-accent pl-4 not-prose mb-8">
         {post.data.excerpt}
       </p>
       <Content />
     </div>
 
-    <!-- Related posts -->
     <div class="mt-16 pt-10 border-t border-accent/15">
       <h3 class="text-sm font-mono text-accent/50 mb-6 tracking-widest">{t('blog.related')}</h3>
       <div class="space-y-3">
         {relatedPosts.map((related) => (
           <a
-            href={`/blog/${related.id}`}
+            href={`/es/blog/${related.id.replace('es/', '')}`}
             class="group flex items-center justify-between p-3 rounded-lg border border-accent/10 hover:border-accent/30 hover:bg-accent/5 transition-all"
           >
             <div>
@@ -120,16 +110,12 @@ const relatedPosts = allPosts
               </p>
               <p class="text-xs text-[#444] font-mono mt-0.5">{related.data.readTime} {t('blog.readTime')}</p>
             </div>
-            <svg
-              class="w-4 h-4 text-[#333] group-hover:text-accent transition-all shrink-0 group-hover:translate-x-1"
-              fill="none" stroke="currentColor" viewBox="0 0 24 24"
-            >
+            <svg class="w-4 h-4 text-[#333] group-hover:text-accent transition-all shrink-0 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </a>
         ))}
       </div>
     </div>
-
   </div>
 </Layout>
