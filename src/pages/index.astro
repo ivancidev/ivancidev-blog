@@ -4,64 +4,51 @@ import Layout from '@/layouts/Layout.astro';
 
 const allPosts = await getCollection('blog');
 const featuredPosts = allPosts
-  .filter((p) => p.data.featured)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .slice(0, 3);
 ---
 
 <Layout>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6">
 
-    <!-- HERO -->
-    <section class="relative pt-20 pb-20">
-      <!-- Wide background ambient glow -->
-      <div class="absolute inset-0 -mx-24 top-0 h-[500px] bg-[#f97316]/[.03] rounded-full blur-3xl pointer-events-none" />
+  <!-- HERO -->
+  <section class="relative w-full overflow-hidden pt-20 pb-28">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#07101f] via-[#05080f] to-[#05080f]" />
+    <div class="absolute top-0 right-0 w-[700px] h-[700px] bg-accent/15 rounded-full blur-[160px] pointer-events-none" />
+    <div class="absolute top-10 left-0 w-96 h-96 bg-accent/8 rounded-full blur-[100px] pointer-events-none" />
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-t from-[#05080f] to-transparent pointer-events-none" />
 
-      <!-- Grid: text left | image right, stacks on mobile -->
-      <div class="relative grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 lg:gap-8 items-center">
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-12 items-center">
 
-        <!-- Text content -->
+        <!-- Text -->
         <div class="order-2 lg:order-1">
-
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#1f1f1f] bg-[#111] text-xs font-mono text-[#888] mb-8"
-            data-aos="fade-up"
-            data-aos-delay="0"
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-[#f97316] animate-pulse" />
-            Disponible para proyectos freelance
-          </div>
-
           <h1
             class="text-5xl sm:text-6xl font-bold tracking-tight mb-6 leading-[1.1]"
             data-aos="fade-up"
             data-aos-delay="80"
           >
-            <span class="block text-[#888] text-3xl sm:text-4xl font-medium mb-1">Hola, soy</span>
-            <span class="block text-[#f97316]">ivancidev</span>
-            <span class="block text-[#555] text-3xl sm:text-4xl font-semibold mt-1">Full Stack Developer</span>
+            <span class="block text-[#7a8fb5] text-3xl sm:text-4xl font-medium mb-1">Hola, soy</span>
+            <span class="block bg-gradient-to-r from-[#93c5fd] via-accent to-[#60a5fa] bg-clip-text text-transparent pb-1">ivancidev</span>
+            <span class="block text-[#4a6494] text-3xl sm:text-4xl font-semibold mt-1">Full Stack · AI Automation</span>
           </h1>
 
           <p
-            class="text-[#777] text-base sm:text-lg leading-relaxed mb-10 max-w-lg"
+            class="text-[#6b80a8] text-base sm:text-lg leading-relaxed mb-10 max-w-lg"
             data-aos="fade-up"
             data-aos-delay="160"
           >
-            Construyo productos web modernos con
-            <span class="text-[#ccc]"> React</span>,
-            <span class="text-[#ccc]"> Astro</span> y
-            <span class="text-[#ccc]"> Node.js</span>. Escribo sobre
-            lo que aprendo para ayudar a otros devs a crecer más rápido.
+            Construyo productos web con
+            <span class="text-[#a8bcd8] font-medium"> React</span>,
+            <span class="text-[#a8bcd8] font-medium"> NestJS</span> y
+            <span class="text-[#a8bcd8] font-medium"> Next.js</span>, e implemento
+            <span class="text-[#a8bcd8] font-medium"> automatizaciones con IA</span>.
+            Escribo sobre lo que aprendo para ayudar a otros devs a crecer más rápido.
           </p>
 
-          <div
-            class="flex flex-wrap items-center gap-4"
-            data-aos="fade-up"
-            data-aos-delay="240"
-          >
+          <div class="flex flex-wrap items-center gap-3" data-aos="fade-up" data-aos-delay="240">
             <a
               href="/blog"
-              class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f97316] text-black font-semibold text-sm rounded-lg hover:bg-[#ea580c] hover:shadow-[0_0_24px_rgba(249,115,22,0.4)] transition-all duration-200"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold text-sm rounded-xl hover:bg-accent-hover hover:scale-[1.03] transition-all duration-200"
             >
               Leer el Blog
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +57,7 @@ const featuredPosts = allPosts
             </a>
             <a
               href="/about"
-              class="inline-flex items-center gap-2 px-5 py-2.5 text-[#888] border border-[#1f1f1f] hover:border-[#333] hover:text-[#f0f0f0] text-sm rounded-lg transition-all"
+              class="inline-flex items-center gap-2 px-5 py-3 text-[#8ba3c7] hover:text-[#c8d8f0] bg-[#0d1e35] hover:bg-[#1a2d4a] text-sm rounded-xl transition-all duration-200 font-medium"
             >
               Sobre mí
             </a>
@@ -78,7 +65,7 @@ const featuredPosts = allPosts
               href="https://github.com/ivancidev"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-sm text-[#555] hover:text-[#f97316] transition-colors font-mono"
+              class="inline-flex items-center gap-2 text-sm text-[#4a6494] hover:text-[#8ba3c7] transition-colors font-mono"
             >
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
@@ -88,69 +75,72 @@ const featuredPosts = allPosts
           </div>
         </div>
 
-        <!-- Profile image — corner brackets effect -->
-        <div class="order-1 lg:order-2 flex flex-col items-center gap-3" data-aos="fade-left" data-aos-delay="100">
-          <div class="photo-wrapper relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[340px] lg:h-[340px]">
-
-            <!-- Ambient glow behind photo -->
-            <div class="photo-glow absolute -inset-8 rounded-2xl bg-[#f97316]/15 blur-3xl" />
-
-            <!-- Photo -->
-            <img
-              src="https://res.cloudinary.com/dvzddtmwg/image/upload/v1775436535/66ac3488-519d-44fc-b836-6433a4d321aa_qesck0.png"
-              alt="ivancidev — Full Stack Developer"
-              width="340"
-              height="340"
-              class="relative w-full h-full object-cover object-top rounded-2xl"
-              loading="eager"
-            />
-
-            <!-- Corner brackets -->
-            <span class="bracket bracket-tl absolute -top-3 -left-3 w-10 h-10 border-t-[3px] border-l-[3px] border-[#f97316] rounded-tl-md" />
-            <span class="bracket bracket-tr absolute -top-3 -right-3 w-10 h-10 border-t-[3px] border-r-[3px] border-[#f97316] rounded-tr-md" />
-            <span class="bracket bracket-bl absolute -bottom-3 -left-3 w-10 h-10 border-b-[3px] border-l-[3px] border-[#f97316] rounded-bl-md" />
-            <span class="bracket bracket-br absolute -bottom-3 -right-3 w-10 h-10 border-b-[3px] border-r-[3px] border-[#f97316] rounded-br-md" />
-
-            <!-- Online indicator -->
-            <span class="absolute bottom-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#0a0a0a]/80 border border-[#1f1f1f] backdrop-blur-sm">
-              <span class="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_6px_rgba(34,197,94,0.8)]" aria-hidden="true" />
-              <span class="text-[10px] font-mono text-[#555]">online</span>
-            </span>
+        <!-- Photo -->
+        <div class="order-1 lg:order-2 flex justify-center" data-aos="fade-left" data-aos-delay="100">
+          <div class="photo-wrapper relative w-64 sm:w-72 lg:w-[320px] h-[360px] sm:h-[400px] lg:h-[420px]">
+            <div class="photo-glow absolute -inset-6 bg-accent/25 blur-[80px] rounded-3xl" />
+            <div class="relative h-full rounded-3xl overflow-hidden border border-accent/20 shadow-[0_0_60px_rgba(96,165,250,0.2)]">
+              <img
+                src="https://res.cloudinary.com/dvzddtmwg/image/upload/v1775436535/66ac3488-519d-44fc-b836-6433a4d321aa_qesck0.png"
+                alt="ivancidev — Full Stack Developer"
+                width="400" height="520"
+                class="w-full h-full object-cover object-top"
+                loading="eager"
+              />
+              <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#07101f]/60 to-transparent" />
+              <div class="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#07101f] via-[#07101f]/75 to-transparent" />
+              <div class="absolute bottom-0 left-0 right-0 p-5">
+                <p class="font-mono text-xs text-accent/70 mb-3">
+                  <span class="text-accent">const</span> dev = <span class="text-[#93c5fd]">"full-stack"</span>;
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#07101f]/80 border border-accent/20 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.9)]" aria-hidden="true" />
+                    <span class="text-[10px] font-mono text-[#7a8fb5]">online</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-accent/40">@ivancidev</span>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <!-- Code-style label -->
-          <p class="font-mono text-xs text-[#333] tracking-wider">
-            <span class="text-[#f97316]">const</span> dev = <span class="text-[#888]">"full-stack"</span>;
-          </p>
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- STATS -->
-    <section class="border-t border-[#1f1f1f] py-10 grid grid-cols-3 gap-6" data-aos="fade-up">
-      {[
-        { value: `${allPosts.length}+`, label: "Artículos publicados" },
-        { value: "10+", label: "Proyectos & tools" },
-        { value: "2+", label: "Años de experiencia" },
-      ].map((stat) => (
-        <div class="text-center">
-          <div class="text-2xl sm:text-3xl font-bold font-mono text-[#f97316] mb-1">{stat.value}</div>
-          <div class="text-xs text-[#555]">{stat.label}</div>
-        </div>
-      ))}
+  <!-- REST -->
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+    <!-- STATS — card contenedor, sin líneas flotantes -->
+    <section class="mb-16" data-aos="fade-up">
+      <div class="grid grid-cols-3 gap-px bg-[#0d1e35] rounded-2xl overflow-hidden">
+        {[
+          { value: `${allPosts.length}+`, label: "Artículos" },
+          { value: "10+", label: "Proyectos & tools" },
+          { value: "2+", label: "Años de exp." },
+        ].map((stat) => (
+          <div class="bg-[#07101f] text-center py-8 px-4 hover:bg-[#091628] transition-colors">
+            <div class="text-3xl sm:text-4xl font-bold font-mono text-accent mb-2">{stat.value}</div>
+            <div class="text-xs text-[#4a6494] tracking-wide uppercase">{stat.label}</div>
+          </div>
+        ))}
+      </div>
     </section>
 
     <!-- FEATURED POSTS -->
-    <section class="border-t border-[#1f1f1f] py-16">
-      <div class="flex items-center justify-between mb-8" data-aos="fade-up">
+    <section class="mb-16">
+      <div class="flex items-center justify-between mb-6" data-aos="fade-up">
         <div>
-          <h2 class="text-xl font-bold text-[#f0f0f0]">Últimos artículos</h2>
-          <p class="text-sm text-[#555] mt-1">Lo que he estado aprendiendo</p>
+          <h2 class="text-xl font-bold text-[#e2eeff]">Últimos artículos</h2>
+          <p class="text-sm text-[#4a6494] mt-0.5">Lo que he estado aprendiendo</p>
         </div>
-        <a href="/blog" class="text-sm text-[#555] hover:text-[#f97316] transition-colors font-mono flex items-center gap-1">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-1 text-sm font-medium text-[#4a6494] hover:text-accent transition-colors duration-200"
+        >
           Ver todos
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </a>
@@ -160,24 +150,33 @@ const featuredPosts = allPosts
         {featuredPosts.map((post, i) => (
           <a
             href={`/blog/${post.id}`}
-            class="group flex items-start justify-between p-4 rounded-xl border border-[#1f1f1f] hover:border-[#f97316]/30 bg-[#111]/50 hover:bg-[#111] transition-all duration-200"
+            class="group flex items-center gap-5 p-5 rounded-2xl bg-[#080f1c] border border-[#1a2540] hover:border-accent/35 hover:bg-[#0a1425] transition-all duration-200"
             data-aos="fade-up"
-            data-aos-delay={i * 80}
+            data-aos-delay={i * 70}
           >
-            <div class="flex items-start gap-4 flex-1 min-w-0">
-              <span class="text-[#333] font-mono text-sm mt-0.5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
-              <div class="flex-1 min-w-0">
-                <h3 class="font-medium text-[#f0f0f0] group-hover:text-[#f97316] transition-colors truncate">{post.data.title}</h3>
-                <p class="text-sm text-[#555] mt-0.5 line-clamp-1">{post.data.excerpt}</p>
-                <div class="flex items-center gap-3 mt-2">
-                  <span class="text-xs text-[#444] font-mono">{post.data.date}</span>
-                  <span class="text-[#333]">·</span>
-                  <span class="text-xs text-[#444] font-mono">{post.data.readTime}</span>
-                </div>
+            <!-- Número grande decorativo -->
+            <span class="hidden sm:block text-5xl font-bold font-mono text-[#0d1e35] group-hover:text-[#1a3158] transition-colors select-none shrink-0 leading-none">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+
+            <!-- Contenido -->
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold text-[#c8d8f0] group-hover:text-accent transition-colors text-base mb-1 truncate">
+                {post.data.title}
+              </h3>
+              <p class="text-sm text-[#4a6494] line-clamp-1 mb-3 leading-relaxed">
+                {post.data.excerpt}
+              </p>
+              <div class="flex items-center gap-2 text-xs font-mono text-[#2d4268]">
+                <span>{post.data.date}</span>
+                <span class="text-[#1a2d4a]">·</span>
+                <span>{post.data.readTime}</span>
               </div>
             </div>
-            <svg class="w-4 h-4 text-[#333] group-hover:text-[#f97316] transition-all shrink-0 mt-1 ml-4 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+
+            <!-- Flecha -->
+            <svg class="w-4 h-4 shrink-0 text-[#2d4268] group-hover:text-accent group-hover:translate-x-1 transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
         ))}
@@ -185,18 +184,20 @@ const featuredPosts = allPosts
     </section>
 
     <!-- CTA -->
-    <section class="border-t border-[#1f1f1f] py-16 pb-24" data-aos="fade-up">
-      <div class="relative p-8 rounded-2xl border border-[#f97316]/20 bg-gradient-to-br from-[#111] to-[#0d0d0d] overflow-hidden">
-        <div class="absolute top-0 right-0 w-48 h-48 bg-[#f97316]/5 rounded-full blur-3xl pointer-events-none" />
-        <div class="absolute bottom-0 left-0 w-32 h-32 bg-[#f97316]/[.03] rounded-full blur-2xl pointer-events-none" />
-        <div class="relative">
-          <h2 class="text-2xl sm:text-3xl font-bold text-[#f0f0f0] mb-3">¿Tienes un proyecto en mente?</h2>
-          <p class="text-[#888] mb-6 max-w-md">
-            Estoy disponible para colaboraciones, freelance o simplemente para charlar sobre tech.
-          </p>
+    <section class="pb-24" data-aos="fade-up">
+      <div class="relative p-8 sm:p-10 rounded-2xl bg-[#080f1c] overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-accent/15 rounded-full blur-3xl pointer-events-none" />
+        <div class="absolute bottom-0 left-0 w-56 h-56 bg-accent/8 rounded-full blur-2xl pointer-events-none" />
+        <div class="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-[#c8d8f0] mb-2">¿Tienes un proyecto en mente?</h2>
+            <p class="text-[#4a6494] max-w-sm leading-relaxed">
+              Estoy disponible para colaboraciones o simplemente para charlar sobre tech.
+            </p>
+          </div>
           <a
             href="mailto:herlanherbas@gmail.com"
-            class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f97316] text-black font-semibold text-sm rounded-lg hover:bg-[#ea580c] hover:shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all duration-200"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent to-accent-hover text-white font-semibold text-sm rounded-xl shadow-[0_0_20px_rgba(96,165,250,0.35)] hover:shadow-[0_0_40px_rgba(96,165,250,0.6)] hover:scale-[1.03] transition-all duration-200 shrink-0"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -211,40 +212,18 @@ const featuredPosts = allPosts
 </Layout>
 
 <style>
-  /* Gentle float */
   .photo-wrapper {
-    animation: float 5s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
   }
-
-  /* Pulsing ambient glow */
   .photo-glow {
-    animation: glow-pulse 3s ease-in-out infinite;
+    animation: glow-pulse 4s ease-in-out infinite;
   }
-
-  /* All brackets pulse together */
-  .bracket {
-    animation: bracket-pulse 3s ease-in-out infinite;
-    transition: border-color 0.3s;
-  }
-
-  /* Stagger each corner slightly */
-  .bracket-tl { animation-delay: 0s; }
-  .bracket-tr { animation-delay: 0.15s; }
-  .bracket-br { animation-delay: 0.3s; }
-  .bracket-bl { animation-delay: 0.45s; }
-
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-14px); }
+    50%       { transform: translateY(-10px); }
   }
-
   @keyframes glow-pulse {
-    0%, 100% { opacity: 0.5; }
-    50%       { opacity: 1; }
-  }
-
-  @keyframes bracket-pulse {
-    0%, 100% { opacity: 0.6; border-color: #f97316; }
-    50%       { opacity: 1;   border-color: #fb923c; box-shadow: 0 0 10px rgba(249,115,22,0.4); }
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.08); }
   }
 </style>

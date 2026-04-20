@@ -7,60 +7,77 @@ import { stack, socialLinks } from '@/lib/data';
   <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
 
     <!-- Breadcrumb -->
-    <div class="flex items-center gap-2 text-xs font-mono text-[#555] mb-12">
-      <a href="/" class="hover:text-[#888] transition-colors">home</a>
+    <div class="flex items-center gap-2 text-xs font-mono text-[#2d4268] mb-10">
+      <a href="/" class="hover:text-accent/60 transition-colors">home</a>
       <span>/</span>
-      <span class="text-[#888]">about</span>
+      <span class="text-[#4a6494]">about</span>
     </div>
 
     <!-- Profile header -->
-    <div class="flex items-start gap-6 mb-12 pb-12 border-b border-[#1f1f1f]">
-      <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#f97316]/20 to-[#00ccff]/10 border border-[#f97316]/20 flex items-center justify-center shrink-0">
-        <span class="text-2xl font-bold font-mono text-[#f97316]">iv</span>
+    <div class="flex items-center gap-5 mb-14" data-aos="fade-up">
+      <div class="relative shrink-0">
+        <img
+          src="https://res.cloudinary.com/dvzddtmwg/image/upload/v1775436535/66ac3488-519d-44fc-b836-6433a4d321aa_qesck0.png"
+          alt="ivancidev"
+          width="80"
+          height="80"
+          class="w-20 h-20 rounded-2xl object-cover object-top"
+        />
+        <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.7)] border-2 border-[#05080f]" />
       </div>
       <div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-[#f0f0f0] mb-1">ivancidev</h1>
-        <p class="text-[#f97316] font-mono text-sm mb-3">Full Stack Developer</p>
-        <div class="flex items-center gap-2 text-xs text-[#555] font-mono">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          Bolivia · Remote
+        <h1 class="text-2xl sm:text-3xl font-bold text-[#e2eeff] mb-1">Ivan Herlan Herbas Zubieta</h1>
+        <p class="text-accent/70 font-mono text-sm mb-2">Full Stack Developer · AI Automation</p>
+        <div class="flex items-center gap-3 text-xs text-[#2d4268] font-mono flex-wrap">
+          <span class="flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Cochabamba, Bolivia
+          </span>
+          <span class="text-[#1a2d4a]">·</span>
+          <span class="text-[#22c55e]">Disponible para remoto</span>
         </div>
       </div>
     </div>
 
     <!-- Bio -->
-    <div class="space-y-4 text-[#888] leading-relaxed mb-14">
-      <h2 class="text-lg font-semibold text-[#f0f0f0]">Hola, soy Iván 👋</h2>
-      <p>
-        Soy un desarrollador Full Stack con más de 2 años de experiencia construyendo
-        productos web modernos. Me especializo en el ecosistema
-        <span class="text-[#f0f0f0]"> JavaScript/TypeScript</span>, principalmente con
-        React, Astro en el frontend y Node.js en el backend.
-      </p>
-      <p>
-        Me apasiona escribir código limpio, crear interfaces de usuario que se sientan
-        rápidas y naturales, y compartir lo que aprendo con la comunidad dev.
-        Este blog es mi espacio para documentar ese proceso.
-      </p>
-      <p>
-        Actualmente estoy disponible para proyectos freelance y estoy abierto a
-        oportunidades de trabajo remoto.
-      </p>
+    <div class="mb-14 p-7 rounded-2xl bg-[#080f1c] border border-[#1a2540]" data-aos="fade-up">
+      <h2 class="text-base font-semibold text-[#e2eeff] mb-4">Hola, soy Iván 👋</h2>
+      <div class="space-y-3 text-[#4a6494] leading-relaxed text-sm">
+        <p>
+          Soy Full Stack Developer de Cochabamba, Bolivia, especializado en construir
+          productos web modernos e implementar
+          <span class="text-[#8ba3c7] font-medium"> automatizaciones con IA</span>.
+          Trabajo con el ecosistema <span class="text-[#8ba3c7] font-medium">TypeScript/JavaScript</span>
+          — React y Next.js en el frontend, NestJS y Node.js en el backend.
+        </p>
+        <p>
+          Me apasiona integrar herramientas de IA como <span class="text-[#8ba3c7] font-medium">n8n, OpenAI y Claude</span>
+          para crear workflows que ahorran tiempo real. También construyo apps móviles con React Native
+          y diseño APIs robustas con Docker y PostgreSQL.
+        </p>
+        <p>
+          Este blog es mi espacio para documentar lo que aprendo y compartirlo con la comunidad dev.
+          Actualmente abierto a proyectos freelance y oportunidades de trabajo remoto.
+        </p>
+      </div>
     </div>
 
     <!-- Tech stack -->
-    <div class="mb-14">
-      <h2 class="text-xs font-mono text-[#555] mb-6">TECH STACK</h2>
-      <div class="grid sm:grid-cols-2 gap-4">
+    <div class="mb-14" data-aos="fade-up">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="text-[10px] font-mono font-semibold text-accent tracking-widest uppercase">Tech Stack</span>
+        <div class="flex-1 h-px bg-[#1a2540]" />
+      </div>
+      <div class="grid sm:grid-cols-2 gap-3">
         {stack.map((group) => (
-          <div class="p-4 rounded-xl border border-[#1f1f1f] bg-[#111]/50">
-            <h3 class="text-xs font-mono text-[#555] mb-3">{group.category}</h3>
+          <div class="p-5 rounded-2xl bg-[#080f1c] border border-[#1a2540]">
+            <h3 class="text-[10px] font-mono font-semibold text-[#2d4268] tracking-widest uppercase mb-3">{group.category}</h3>
             <div class="flex flex-wrap gap-2">
               {group.items.map((item) => (
-                <span class="text-xs px-2.5 py-1 rounded-md font-mono text-[#888] bg-[#161616] border border-[#1f1f1f] hover:border-[#333] hover:text-[#f0f0f0] transition-all">
+                <span class="text-xs px-2.5 py-1 rounded-lg font-mono text-[#6b80a8] bg-[#0d1e35] hover:text-accent/80 transition-colors cursor-default">
                   {item}
                 </span>
               ))}
@@ -70,43 +87,38 @@ import { stack, socialLinks } from '@/lib/data';
       </div>
     </div>
 
-    <!-- Experience -->
-    <div class="mb-14">
-      <h2 class="text-xs font-mono text-[#555] mb-6">EXPERIENCIA</h2>
-      <div class="space-y-4">
-        {[
-          {
-            role: "Full Stack Developer",
-            company: "Freelance",
-            period: "2024 — Presente",
-            description: "Desarrollo de aplicaciones web con React, Astro y Node.js. Implementación de arquitecturas escalables y APIs RESTful.",
-          },
-          {
-            role: "Frontend Developer",
-            company: "Proyectos universitarios",
-            period: "2023 — 2024",
-            description: "Construcción de interfaces de usuario con React y TypeScript. Integración con APIs y optimización de performance.",
-          },
-        ].map((exp) => (
-          <div class="flex gap-4 p-4 rounded-xl border border-[#1f1f1f] bg-[#111]/30">
-            <div class="w-px bg-[#1f1f1f] shrink-0 ml-2 my-1" />
-            <div>
-              <div class="flex items-center gap-2 flex-wrap mb-1">
-                <h3 class="font-medium text-[#f0f0f0]">{exp.role}</h3>
-                <span class="text-xs text-[#555]">@</span>
-                <span class="text-sm text-[#f97316] font-mono">{exp.company}</span>
-              </div>
-              <p class="text-xs font-mono text-[#444] mb-2">{exp.period}</p>
-              <p class="text-sm text-[#666]">{exp.description}</p>
-            </div>
-          </div>
-        ))}
+    <!-- Currently at -->
+    <div class="mb-14" data-aos="fade-up">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="text-[10px] font-mono font-semibold text-accent tracking-widest uppercase">Actualmente</span>
+        <div class="flex-1 h-px bg-[#1a2540]" />
+      </div>
+      <div class="flex items-center gap-4 p-5 rounded-2xl bg-[#080f1c] border border-[#1a2540]">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#22c55e] shadow-[0_0_10px_rgba(34,197,94,0.6)] shrink-0" />
+        <div>
+          <p class="text-sm font-semibold text-[#c8d8f0]">Full Stack Developer <span class="font-mono text-accent/60 text-xs ml-1">@ useTeam</span></p>
+          <p class="text-xs font-mono text-[#2d4268] mt-0.5">Jul. 2025 — Presente · En remoto</p>
+        </div>
+        <a
+          href="https://www.linkedin.com/in/herlan-herbas-zubieta/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ml-auto text-[11px] font-mono text-[#2d4268] hover:text-accent transition-colors flex items-center gap-1"
+        >
+          Ver LinkedIn
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
       </div>
     </div>
 
     <!-- Social links -->
-    <div class="mb-14">
-      <h2 class="text-xs font-mono text-[#555] mb-6">ENCUÉNTRAME EN</h2>
+    <div class="mb-10" data-aos="fade-up">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="text-[10px] font-mono font-semibold text-accent tracking-widest uppercase">Encuéntrame en</span>
+        <div class="flex-1 h-px bg-[#1a2540]" />
+      </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
           {
@@ -131,9 +143,9 @@ import { stack, socialLinks } from '@/lib/data';
             href={social.href}
             target={social.href.startsWith('mailto') ? '_self' : '_blank'}
             rel="noopener noreferrer"
-            class="group flex flex-col items-center gap-2 p-4 rounded-xl border border-[#1f1f1f] hover:border-[#f97316]/30 bg-[#111]/50 hover:bg-[#111] transition-all"
+            class="group flex flex-col items-center gap-2.5 p-4 rounded-2xl bg-[#080f1c] border border-[#1a2540] hover:border-accent/30 hover:bg-[#0a1425] transition-all duration-200"
           >
-            <span class="text-[#555] group-hover:text-[#f97316] transition-colors">
+            <span class="text-[#2d4268] group-hover:text-accent transition-colors">
               {social.stroke ? (
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={social.icon} />
               ) : (
@@ -141,8 +153,8 @@ import { stack, socialLinks } from '@/lib/data';
               )}
             </span>
             <div class="text-center">
-              <p class="text-xs font-semibold text-[#888] group-hover:text-[#f0f0f0] transition-colors">{social.label}</p>
-              <p class="text-[11px] text-[#444] font-mono">{social.username}</p>
+              <p class="text-xs font-semibold text-[#4a6494] group-hover:text-[#c8d8f0] transition-colors">{social.label}</p>
+              <p class="text-[11px] text-[#2d4268] font-mono">{social.username}</p>
             </div>
           </a>
         ))}
@@ -150,23 +162,21 @@ import { stack, socialLinks } from '@/lib/data';
     </div>
 
     <!-- CTA -->
-    <div class="p-6 rounded-xl border border-[#1f1f1f] bg-[#111]/50 flex items-center justify-between gap-4">
-      <div>
-        <p class="font-medium text-[#f0f0f0] mb-1">¿Quieres saber más?</p>
-        <p class="text-sm text-[#555]">Descarga mi CV o contáctame directamente.</p>
-      </div>
-      <div class="flex items-center gap-3 shrink-0">
+    <div class="relative p-7 rounded-2xl bg-[#080f1c] border border-accent/15 overflow-hidden" data-aos="fade-up">
+      <div class="absolute top-0 right-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
+      <div class="relative flex items-center justify-between gap-4">
+        <div>
+          <p class="font-semibold text-[#c8d8f0] mb-1">¿Quieres saber más?</p>
+          <p class="text-sm text-[#4a6494]">Contáctame directamente.</p>
+        </div>
         <a
           href={socialLinks.email}
-          class="px-4 py-2 text-sm font-medium text-[#888] border border-[#1f1f1f] hover:border-[#333] hover:text-[#f0f0f0] rounded-lg transition-all"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-accent to-accent-hover text-white font-semibold text-sm rounded-xl shadow-[0_0_16px_rgba(96,165,250,0.3)] hover:shadow-[0_0_28px_rgba(96,165,250,0.55)] hover:scale-[1.03] transition-all duration-200 shrink-0"
         >
-          Email
-        </a>
-        <a
-          href="#"
-          class="px-4 py-2 text-sm font-semibold bg-[#f97316] text-black rounded-lg hover:bg-[#ea580c] transition-colors"
-        >
-          Descargar CV
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Contáctame
         </a>
       </div>
     </div>
