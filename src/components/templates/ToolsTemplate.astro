@@ -13,13 +13,13 @@ const allTools = devTools;
 
     <!-- Header -->
     <div class="mb-10" data-aos="fade-up">
-      <div class="flex items-center gap-2 text-xs font-mono text-[#2d4268] mb-5">
-        <a href={lang === 'es' ? '/es' : '/'} class="hover:text-accent/60 transition-colors">home</a>
+      <div class="flex items-center gap-2 text-xs font-mono text-accent/40 mb-5">
+        <a href={lang === 'es' ? '/es' : '/'} class="hover:text-accent/70 transition-colors">home</a>
         <span>/</span>
-        <span class="text-[#4a6494]">tools</span>
+        <span class="text-accent/60">tools</span>
       </div>
       <h1 class="text-4xl sm:text-5xl font-bold text-[#e2eeff] mb-4 tracking-tight">{t('tools.title')}</h1>
-      <p class="text-[#4a6494] max-w-lg leading-relaxed">{t('tools.desc')}</p>
+      <p class="text-[#8ba3c7] max-w-lg leading-relaxed">{t('tools.desc')}</p>
     </div>
 
     <!-- Filter tabs -->
@@ -35,7 +35,7 @@ const allTools = devTools;
         return count > 0 ? (
           <button
             data-filter={cat.id}
-            class="filter-btn px-4 py-1.5 rounded-full text-xs font-mono font-semibold transition-all duration-200 bg-[#080f1c] text-[#4a6494] hover:text-[#c8d8f0] hover:bg-[#0d1e35]"
+            class="filter-btn px-4 py-1.5 rounded-full text-xs font-mono font-semibold transition-all duration-200 bg-accent/5 text-[#8ba3c7] border border-accent/10 hover:text-[#c8d8f0] hover:border-accent/30 hover:bg-accent/10"
           >
             {cat.label} <span class="opacity-50 ml-1">{count}</span>
           </button>
@@ -55,8 +55,6 @@ const allTools = devTools;
           data-color={tool.color}
           data-initials={tool.initials}
           data-favorite={tool.favorite ? "true" : "false"}
-          data-aos="fade-up"
-          data-aos-delay={i * 30}
         >
           <div class="absolute left-0 top-4 bottom-4 w-[2px] rounded-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
           <div
@@ -76,7 +74,7 @@ const allTools = devTools;
                 </svg>
               )}
             </div>
-            <p class="text-[11px] text-[#4a6494] leading-relaxed line-clamp-2">{lang === 'en' ? tool.descriptionEn : tool.description}</p>
+            <p class="text-[11px] text-[#8ba3c7] leading-relaxed line-clamp-2">{lang === 'en' ? tool.descriptionEn : tool.description}</p>
           </div>
           <svg class="absolute top-3 right-3 w-3.5 h-3.5 text-[#1a2d4a] group-hover:text-accent/50 transition-colors shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -85,7 +83,7 @@ const allTools = devTools;
       ))}
     </div>
 
-    <p class="text-center text-xs font-mono text-[#1a2d4a] mt-12 pb-4" data-aos="fade-up">
+    <p class="text-center text-xs font-mono text-[#6b80a8] mt-12 pb-4" data-aos="fade-up">
       {t('tools.updated')}
     </p>
 
@@ -135,11 +133,11 @@ const allTools = devTools;
     btn.addEventListener('click', () => {
       const filter = btn.dataset.filter!;
       filterBtns.forEach(b => {
-        b.classList.remove('active', 'bg-accent', 'text-white');
-        b.classList.add('bg-[#080f1c]', 'text-[#4a6494]');
+        b.classList.remove('active', 'bg-accent', 'text-white', 'border-accent/30', 'bg-accent/10');
+        b.classList.add('bg-accent/5', 'text-[#8ba3c7]', 'border-accent/10');
       });
       btn.classList.add('active', 'bg-accent', 'text-white');
-      btn.classList.remove('bg-[#080f1c]', 'text-[#4a6494]');
+      btn.classList.remove('bg-accent/5', 'text-[#8ba3c7]', 'border-accent/10');
       cards.forEach(card => {
         card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
       });
