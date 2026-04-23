@@ -295,6 +295,15 @@ export const devTools: DevTool[] = [
     color: "#4285F4",
     initials: "GV",
   },
+  {
+    name: "Make",
+    description: "Plataforma de automatización visual (ex-Integromat). Conecto apps y servicios con flows avanzados: condicionales, iteradores y transformaciones de datos sin código.",
+    descriptionEn: "Visual automation platform (formerly Integromat). Connect apps and services with advanced flows: conditionals, iterators and data transformations without code.",
+    category: "AI",
+    url: "https://make.com",
+    color: "#6D00CC",
+    initials: "Mk",
+  },
 ];
 
 export const devToolCategories = [
@@ -310,12 +319,12 @@ export const devToolCategories = [
 // ─── Stack & Social ───────────────────────────────────────────────────────────
 
 export const stack = [
-  { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Astro", "Angular", "React Native"] },
-  { category: "Backend", items: ["NestJS", "Node.js", "Express.js", "Python", "WebSockets", "JWT"] },
-  { category: "AI & Automatización", items: ["n8n", "OpenAI API", "Claude AI", "ElevenLabs", "Cursor AI"] },
-  { category: "Bases de datos", items: ["PostgreSQL", "MongoDB", "Supabase", "Firebase", "Redis", "MySQL"] },
-  { category: "DevOps & Cloud", items: ["Docker", "GitHub Actions", "Vercel", "Azure", "Netlify", "Render"] },
-  { category: "Tools", items: ["Figma", "Postman", "Swagger", "Git", "Scrum"] },
+  { category: "Frontend",          categoryEn: "Frontend",      items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Astro", "Angular", "React Native"] },
+  { category: "Backend",           categoryEn: "Backend",       items: ["NestJS", "Node.js", "Express.js", "Python", "WebSockets", "JWT"] },
+  { category: "AI & Automatización", categoryEn: "AI & Automation", items: ["n8n", "OpenAI API", "Claude AI", "ElevenLabs", "Cursor AI", "Make", "GitHub Copilot", "Antigravity"] },
+  { category: "Bases de datos",    categoryEn: "Databases",     items: ["PostgreSQL", "MongoDB", "Supabase", "Firebase", "Redis", "MySQL"] },
+  { category: "DevOps & Cloud",    categoryEn: "DevOps & Cloud", items: ["Docker", "GitHub Actions", "Vercel", "Azure", "Netlify", "Render"] },
+  { category: "Tools",             categoryEn: "Tools",         items: ["Figma", "Postman", "Swagger", "Git", "Scrum"] },
 ];
 
 export const socialLinks = {

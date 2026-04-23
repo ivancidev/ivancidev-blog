@@ -1,5 +1,9 @@
 ---
 import { socialLinks } from '@/lib/data';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 
@@ -22,14 +26,13 @@ const year = new Date().getFullYear();
               height="36"
               class="w-9 h-9 rounded-full object-cover object-top group-hover:ring-2 group-hover:ring-accent/40 transition-all duration-200"
             />
-            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#22c55e] border-2 border-[#05080f]" />
           </div>
           <div>
             <span class="block text-sm font-semibold text-[#c8d8f0] group-hover:text-accent transition-colors">ivancidev</span>
-            <span class="block text-[11px] text-[#2d4268] font-mono">Full Stack Developer</span>
+            <span class="block text-[11px] text-[#8ba3c7] font-mono">{t('footer.dev')}</span>
           </div>
         </a>
-        <p class="text-[11px] text-[#1a2d4a] font-mono">© {year} · Hecho con Astro y ☕</p>
+        <p class="text-[11px] text-[#6b80a8] font-mono">© {year} · {t('footer.made')}</p>
       </div>
 
       <!-- Nav links -->
@@ -41,7 +44,7 @@ const year = new Date().getFullYear();
         ].map(link => (
           <a
             href={link.href}
-            class="px-3 py-1.5 text-xs text-[#2d4268] hover:text-[#8ba3c7] transition-colors rounded-lg hover:bg-[#0d1e35]"
+            class="px-3 py-1.5 text-xs text-[#8ba3c7] hover:text-accent transition-colors rounded-lg hover:bg-accent/8"
           >
             {link.label}
           </a>
@@ -54,7 +57,7 @@ const year = new Date().getFullYear();
           href={socialLinks.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="w-8 h-8 flex items-center justify-center rounded-lg text-[#2d4268] hover:text-accent hover:bg-[#0d1e35] transition-all"
+          class="w-8 h-8 flex items-center justify-center rounded-lg text-[#8ba3c7] hover:text-accent hover:bg-accent/8 transition-all"
           aria-label="GitHub"
         >
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -65,7 +68,7 @@ const year = new Date().getFullYear();
           href={socialLinks.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          class="w-8 h-8 flex items-center justify-center rounded-lg text-[#2d4268] hover:text-accent hover:bg-[#0d1e35] transition-all"
+          class="w-8 h-8 flex items-center justify-center rounded-lg text-[#8ba3c7] hover:text-accent hover:bg-accent/8 transition-all"
           aria-label="LinkedIn"
         >
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -76,7 +79,7 @@ const year = new Date().getFullYear();
           href={socialLinks.twitter}
           target="_blank"
           rel="noopener noreferrer"
-          class="w-8 h-8 flex items-center justify-center rounded-lg text-[#2d4268] hover:text-accent hover:bg-[#0d1e35] transition-all"
+          class="w-8 h-8 flex items-center justify-center rounded-lg text-[#8ba3c7] hover:text-accent hover:bg-accent/8 transition-all"
           aria-label="Twitter/X"
         >
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">

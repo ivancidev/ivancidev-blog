@@ -24,7 +24,7 @@ export const ui = {
     'home.cta.about': 'About me',
     // Home – stats
     'stats.articles': 'Articles',
-    'stats.projects': 'Projects & tools',
+    'stats.projects': 'Tools',
     'stats.years': 'Years of exp.',
     // Home – posts
     'home.posts.title': 'Latest articles',
@@ -86,7 +86,7 @@ export const ui = {
     'home.cta.about': 'Sobre mí',
     // Home – stats
     'stats.articles': 'Artículos',
-    'stats.projects': 'Proyectos & tools',
+    'stats.projects': 'Herramientas',
     'stats.years': 'Años de exp.',
     // Home – posts
     'home.posts.title': 'Últimos artículos',
